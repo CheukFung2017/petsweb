@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="CheukFung" content="">
+        <title>Pets' hope</title>
+
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/reset.css">  
+        <link rel="stylesheet" href="css/login.css"> 
+        <link rel="stylesheet" href="css/home.css"> 
+        <link rel="stylesheet" href="css/prompt-box.css"> 
+        <script src="js/jquery.min.js"></script>
+        <script src="js/sweetalert2.all.min.js"></script>
+
+    </head>
+    <body>
+        <!-- 顶部导航栏 -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                 aria-controls="navbar">
+                    <span class="sr-only">Toggle na vigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a id="navlogo" href="index.html"></a></li>
+                    <li class="active">
+                        <a href="index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="adoption.html">领养</a>
+                    </li>
+                    <li>
+                        <a href="salvation.html">救助</a>
+                    </li>
+                    <li>
+                        <a href="courtship.html">求偶</a>
+                    </li>
+                    <li>
+                        <a href="knowledge.html">知识</a>
+                    </li>
+                </ul>
+    
+               
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a id="login-button" class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal()">登录</a>
+                    </li>
+                    <li>
+                        <a id="signin-button" class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">注册</a>
+                    </li>
+                    <li id="account" style="display: none;">
+                        <a id="accountname" onmouseover="showPromptBox()" onmouseout="closePromptBox()"></a>
+                    </li>
+                </ul>
+
+                
+    
+                      <section id="search">
+                            <!-- Search form -->
+                            <form class="navbar-form navbar-right" action="#" onSubmit="return false;" method="get">
+                                <input id="searchkey" type="text" onFocus="if (this.value =='Search..' ) this.value=''" onBlur="if (this.value=='') this.value='Search..'"
+                                 value="Search.." name="q">
+                                <input type="button" value="" onclick="searchClickAjax()">
+                            </form>
+                        </section>
+            </div>
+            <!--/.nav-collapse -->
+            <div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
+
+                    <p>
+                        <a onclick="goSetting()">个人中心</a>
+                    </p>
+                    <p>
+                        <a onclick="logout()">退出登陆</a>
+                    </p>
+                </div>
+        </nav>
+
+        <!-- 注册/登陆模太框 -->
+        <div class="modal fade login " id="loginModal">
+                <div class="modal-dialog login animated">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Login with</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="box">
+                                <div class="content">
+        
+                                    <div class="error"></div>
+                                    <div class="form loginBox">
+                                        <form method="post" accept-charset="UTF-8">
+                                            <input id="nameoremail" class="form-control" type="text" placeholder="用户名/邮箱" name="nameoremail">
+                                            <span class="error error5"></span>
+                                            <input id="loginpwd" class="form-control" type="password" placeholder="密码" name="password">
+                                            <span class="error error6"></span>
+                                            <!-- <div style="margin-top: -18px;">
+                                                <input id="validatecode" name="validatecode" class="form-control" type="text" placeholder="请输入右侧验证码" style="display: inline-block;width:50%;"><img id="validatecodeimg" style="display: inline-block;width:50%;" src="http://www.bedgasmblog.cn/user/validatecode" onclick="refreshvalidatecode()"/>
+                                                <span class="error error7"></span>
+                                            </div> -->
+                                            <input id="loginBtn" class="btn btn-default btn-login" type="button" value="登 录" onclick="loginAjax()">
+                                            <span class="error" id="loginfail"></span>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div class="content registerBox" style="display:none;">
+                                    <div class="form">
+                                        <form method="post" html="{:multipart=>true}" data-remote="true" accept-charset="UTF-8">
+                                            <input id="username" class="form-control form-control1 " type="text" placeholder="用户名(4-16位)" name="username">
+                                            <span class="error error1 singin-error"></span>
+        
+                                            <input id="email" class="form-control form-control1" type="text" placeholder="邮箱" name="email">
+                                            <span class="error error2 singin-error"></span>
+        
+                                            <input id="pwd" class="form-control form-control1" type="password" placeholder="密码(8-30位)" name="pwd">
+                                            <span class="error error3 singin-error"></span>
+        
+                                            <input id="password_confirmation" class="form-control form-control1" type="password" placeholder="确认密码" name="password_confirmation">
+                                            <span class="error error4 singin-error"></span>
+        
+                                            <input id="register-button" class="btn btn-default btn-register" type="button" value="注 册" name="commit" onclick="register()">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="forgot login-footer">
+                                <span>还没账号?
+                                    <a href="javascript: showRegisterForm();">去注册&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                </span>
+                                <span>
+                                    <a href="forgetpassword.html">(忘记密码?)</a>
+                                </span>
+                            </div>
+                            <div class="forgot register-footer" style="display:none">
+                                <span>已有账号?</span>
+                                <a href="javascript: showLoginForm();">去登录</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        
+        <!-- 轮播图 -->
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
+                    <!-- 轮播（Carousel）指标 -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#myCarousel" data-slide-to="1"></li>
+                        <li data-target="#myCarousel" data-slide-to="2"></li>
+                        <li data-target="#myCarousel" data-slide-to="3"></li>
+                        <li data-target="#myCarousel" data-slide-to="4"></li>
+                    </ol>
+                    <!-- 轮播（Carousel）项目 -->
+                    <div class="carousel-inner">
+            
+                        <div class="item active">
+                            <a href="#"><img src="images/1.jpg" alt="First slide" style="width: 100%;height: 100%;"></a>
+                            <div class="carousel-caption">英国旅游 地地道道的英伦味</div>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img src="images/2.jpg" alt="Second slide" style="width: 100%;height: 100%;"></a>
+                            <div class="carousel-caption">北英格兰时光之旅 遇见最迷人的英伦范儿</div>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img src="images/3.jpg" alt="Third slide" style="width: 100%;height: 100%;"></a>
+                            <div class="carousel-caption">好用的 Chrome 扩展，我们又为你找到了这 10 款</div>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img src="images/4.jpg" alt="Fourth slide" style="width: 100%;height: 100%;"></a>
+                            <div class="carousel-caption">没想到柏林十大必去的景 竟是一场时尚歌舞秀</div>
+                        </div>
+                        <div class="item">
+                            <a href="#"><img src="images/9.jpg" alt="Fifth slide" style="width: 100%;height: 100%;"></a>
+                            <div class="carousel-caption">旅行灵感开始的地方</div>
+                        </div>
+                    </div>
+                    <!-- 轮播（Carousel）导航 -->
+                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 sidebar-gutter">
+                   <div class="sidebar-widget">
+                        <h3 class="sidebar-title">最新领养</h3>
+                        <div class="widget-container" id="hotarticle">
+                                <article class="widget-post">
+                                        <div class="post-image">
+                                            <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                        </div>
+                                        <div class="post-body">
+                                            <h2><a href="post.html">我家可爱小金毛等你来领养</a></h2>
+                                            <div class="pet_info">宠物类型：<span class="pet_msg">狗狗</span>宠物昵称：<span class="pet_msg">Dorry</span> 宠物性别:<span class="pet_msg">公</span>所在地区：<span class="pet_msg">广州</span></div>
+                                            <div class="post-meta">
+                                                <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                            </div>
+                                        </div>
+                                </article>
+                                <article class="widget-post">
+                                        <div class="post-image">
+                                            <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                        </div>
+                                        <div class="post-body">
+                                            <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                            <div class="post-meta">
+                                                <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                            </div>
+                                        </div>
+                                </article>
+                                <article class="widget-post">
+                                        <div class="post-image">
+                                            <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                        </div>
+                                        <div class="post-body">
+                                            <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                            <div class="post-meta">
+                                                <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                            </div>
+                                        </div>
+                                </article>
+                                <article class="widget-post">
+                                        <div class="post-image">
+                                            <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                        </div>
+                                        <div class="post-body">
+                                            <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                            <div class="post-meta">
+                                                <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                            </div>
+                                        </div>
+                                </article>
+                                <article class="widget-post">
+                                    <a href="#" class="readmore">查看更多</a>
+                                </article>
+                            
+                        </div>
+                    </div>
+                    <!-- 宠物救助 -->
+                    <div class="sidebar-widget">
+                            <h3 class="sidebar-title">宠物救助</h3>
+                            <div class="widget-container" id="hotarticle">
+                                    <article class="widget-post">
+                                            <div class="post-image">
+                                                <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                            </div>
+                                            <div class="post-body">
+                                                <h2><a href="post.html">我家可爱小金毛等你来领养</a></h2>
+                                                <div class="pet_info">宠物类型：<span class="pet_msg">狗狗</span>宠物昵称：<span class="pet_msg">Dorry</span> 宠物性别:<span class="pet_msg">公</span>所在地区：<span class="pet_msg">广州</span></div>
+                                                <div class="post-meta">
+                                                    <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                </div>
+                                            </div>
+                                    </article>
+                                    <article class="widget-post">
+                                            <div class="post-image">
+                                                <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                            </div>
+                                            <div class="post-body">
+                                                <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                                <div class="post-meta">
+                                                    <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                </div>
+                                            </div>
+                                    </article>
+                                    <article class="widget-post">
+                                            <div class="post-image">
+                                                <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                            </div>
+                                            <div class="post-body">
+                                                <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                                <div class="post-meta">
+                                                    <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                </div>
+                                            </div>
+                                    </article>
+                                    <article class="widget-post">
+                                            <div class="post-image">
+                                                <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                            </div>
+                                            <div class="post-body">
+                                                <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                                <div class="post-meta">
+                                                    <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                </div>
+                                            </div>
+                                    </article>
+                                    <article class="widget-post">
+                                            <a href="#" class="readmore">查看更多</a>
+                                    </article>
+                                
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-5  sidebar-gutter">
+                        <aside>      
+                                <!-- 宠物求偶 -->
+                                <div class="sidebar-widget">
+                                    <h3 class="sidebar-title">宠物求偶</h3>
+                                    <div class="widget-container" id="hotarticle">
+                                            <article class="widget-post">
+                                                    <div class="post-image">
+                                                        <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                                    </div>
+                                                    <div class="post-body">
+                                                        <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                                        <div class="post-meta">
+                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                        </div>
+                                                    </div>
+                                            </article>
+                                            <article class="widget-post">
+                                                    <div class="post-image">
+                                                        <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                                    </div>
+                                                    <div class="post-body">
+                                                        <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                                        <div class="post-meta">
+                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                        </div>
+                                                    </div>
+                                            </article>
+                                            <article class="widget-post">
+                                                    <div class="post-image">
+                                                        <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                                    </div>
+                                                    <div class="post-body">
+                                                        <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                                        <div class="post-meta">
+                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                        </div>
+                                                    </div>
+                                            </article>
+                                            <article class="widget-post">
+                                                    <div class="post-image">
+                                                        <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                                    </div>
+                                                    <div class="post-body">
+                                                        <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
+                                                        <div class="post-meta">
+                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                        </div>
+                                                    </div>
+                                            </article>
+                                            <article class="widget-post">
+                                                    <a href="#" class="readmore">查看更多</a>
+                                            </article>
+                                        
+                                    </div>
+                                </div>
+                                <!-- 养宠知识 -->
+                                <div class="sidebar-widget ">
+                                    <h3 class="sidebar-title ">养宠知识</h3>
+                                    <div class="widget-container " >
+                                            <article class="widget-post">    
+                                                    <div class="post-body">
+                                                        <h2><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></h2>
+                                                        <div class="post-meta">
+                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                        </div>
+                                                    </div>
+                                            </article>
+                                            <article class="widget-post">    
+                                                    <div class="post-body">
+                                                        <h2><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></h2>
+                                                        <div class="post-meta">
+                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                        </div>
+                                                    </div>
+                                            </article>
+                                            <article class="widget-post">    
+                                                    <div class="post-body">
+                                                        <h2><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></h2>
+                                                        <div class="post-meta">
+                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                        </div>
+                                                    </div>
+                                            </article>
+                                            <article class="widget-post">    
+                                                    <div class="post-body">
+                                                        <h2><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></h2>
+                                                        <div class="post-meta">
+                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                        </div>
+                                                    </div>
+                                            </article>
+                                            <article class="widget-post">    
+                                                    <div class="post-body">
+                                                        <h2><a href="post.html">Lorem ipsum dolor sit amet consectetur adipisicing elit.</a></h2>
+                                                        <div class="post-meta">
+                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                        </div>
+                                                    </div>
+                                            </article>
+                                            <article class="widget-post">
+                                                    <a href="#" class="readmore">查看更多</a>
+                                                </article>
+                                    </div>
+                                
+                                </div>
+                                
+                                
+                         </aside>
+                </div>
+            </div>
+            
+        </div>
+        <footer class="footer "> 
+
+                <div class="footer-bottom ">
+                    <h5>感谢使用Petsweb宠物服务交流平台</h5>
+                    <i class="fa fa-copyright "></i> Copyright 2019 CheukFung. All Rights Reserved.<br>
+                    
+                </div>
+    
+            </footer>
+
+        <script src="js/bootstrap.min.js "></script>
+		<script src="js/jquery.bxslider.js "></script>
+		<script src="js/mooz.scripts.min.js "></script>		
+		<script type="text/javascript" src="js/login.js "></script>		
+		<script type="text/javascript" src="js/prompt.js "></script>
+		
+    </body>
+</html>

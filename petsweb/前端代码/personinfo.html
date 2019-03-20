@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>个人资料</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/houtai-reset.css">
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/personInfo.css">
+
+	<script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/prompt-box.css"> 
+    <script src="js/sweetalert2.all.min.js"></script>
+
+
+</head>
+<body class="user-select">  
+
+	<div class="container-fluid" id="fluid">
+         <nav class="navbar navbar-inverse navbar-fixed-top">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                         aria-controls="navbar">
+                            <span class="sr-only">Toggle na vigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li><a id="navlogo" href="index.html"></a></li>
+                            <li>
+                                <a href="index.html">首页</a>
+                            </li>
+                            <li>
+                                <a href="adoption.html">领养</a>
+                            </li>
+                            <li>
+                                <a href="salvation.html">救助</a>
+                            </li>
+                            <li>
+                                <a href="courtship.html">求偶</a>
+                            </li>
+                            <li>
+                                <a href="knowledge.html">知识</a>
+                            </li>
+                        </ul>
+            
+                       
+        
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a id="login-button" class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal()">登录</a>
+                            </li>
+                            <li>
+                                <a id="signin-button" class="btn big-register" data-toggle="modal" href="javascript:void(0)" onclick="openRegisterModal();">注册</a>
+                            </li>
+                            <li id="account" style="display: none;">
+                                <a id="accountname" onmouseover="showPromptBox()" onmouseout="closePromptBox()"></a>
+                            </li>
+                        </ul>
+        
+                        
+            
+                             
+                    </div>
+                    <!--/.nav-collapse -->
+                    <div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
+
+                            <p>
+                                <a onclick="goSetting()">个人中心</a>
+                            </p>
+                            <p>
+                                <a onclick="logout()">退出登陆</a>
+                            </p>
+                        </div>
+         </nav>
+                 <div class="row">
+
+				<aside class="col-sm-2 col-md-2 col-lg-2 sidebar">
+					<ul class="nav nav-sidebar">
+						<li><a href="personHome.html" class="myhead"><!-- <div class="myhead"></div> --></a></li>
+					</ul>
+					<ul class="nav nav-sidebar">
+						<li class="active"><a href="personinfo.html"><span class="glyphicon glyphicon-home">&nbsp</span>我的资料</a></li>
+						<li><a href="myarticle.html"><span class="glyphicon glyphicon-pushpin">&nbsp</span>我的发布</a></li>
+                        <li><a href="mycomment.html"><span class="glyphicon glyphicon-comment">&nbsp</span>我的评论</a></li>
+                        <li><a href="mycollection.html"><span class="glyphicon glyphicon-star">&nbsp</span>我的收藏</a></li>
+						<!-- <li><a href="#">栏目</a></li> -->
+					</ul>
+				
+					<ul class="nav nav-sidebar">		
+						<li style="display:none;"><a href="#"><span class="glyphicon glyphicon-user">&nbsp</span>用户管理</a></li>
+						<li><a href="#"><span class="glyphicon glyphicon-log-out">&nbsp</span>退出登陆</a></li>
+					</ul>
+				</aside>
+				   
+				<div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
+
+					<div class="container" style="margin-bottom: 140px;">
+
+						<form  method="post" class="mainForm infoForm">
+							
+						      <h1 class="page-header">个人资料</h1>
+						      
+						      <div class="col-md-2">
+						      	<!-- <div class="headimg" id="finalImg"></div> -->
+						      	<div style="width: 120px;height: 120px;/*border: solid 1px #555;*/padding: 5px;margin-top: 10px" class="becenter">
+    								<img id="finalImg" src="" width="100%" height="100%">
+                                </div>
+                              
+                                
+						      	<div class="change">
+                                        <ul>
+                                                <li><span class="glyphicon glyphicon-camera"></span><label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                                                      <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden touxiang">
+                                                      &nbsp;修改头像
+                                                  </label></li>
+                                                
+                                                <li><span class="glyphicon glyphicon-edit"></span><a href="javascript:tab()" class="changepasswd">&nbsp;修改密码</a></li>
+                                            </ul>
+						      	</div>
+						      </div>
+
+
+
+						      <div class="col-md-8 col-md-offset-1 basicinfo" >
+						      		<div class="username">
+						      			<label class="col-md-2 control-label">用户名:</label>
+						      			<label class="col-md-9" style="margin-left: 10px" id="username"></label>
+						      		</div>
+						      		<div class="form-group">
+						      			<label class="col-md-2 control-label">姓名：</label>
+						      			<div class="col-md-9">
+						      				<input type="text" class="form-control" name="realname" theone="false" id="realname">
+						      			<!-- <div class="lable-name-desc" style="">昵称只能由大小写字母，下划线组成</div> -->
+						      			<!-- <span class="error error1">昵称只能由大小写字母，下划线组成</span> -->
+						      			</div>
+                                      </div>
+                                      <div class="form-group">
+                                            <label class="col-md-2 control-label">联系电话</label>
+                                            <div class="col-md-9">
+                                                <input type="text" class="form-control" name="phone"  id="phone">
+                                                <span class="error error2"></span>
+                                            </div>
+                                        </div>
+						      		<div class="form-group">
+						      			<label class="col-md-2 control-label">邮箱：</label>
+						      			<div class="col-md-9">
+						      				<input type="text" class="form-control" name="email" id="email">
+						      			    <!-- <div class="emailformat" >请输入正确的邮箱格式！</div> -->
+						      			    <span class="error error2"></span>
+						      			</div>
+						      		</div>
+						      		
+						      		<input type="button" class="saveinfo btn btn-primary" name="submit" value="保存" onclick="saveInfoAjax()">
+						      </div>
+
+		 				 </form>
+		 				 <form  method="post" class="mainForm pwdForm" style="display: none;">
+							
+						      <h1 class="page-header">修改密码</h1>
+						      
+						      <div class="col-md-2">
+						      	<!-- <div class="headimg" id="finalImg"></div> -->
+						      	<div style="width: 120px;height: 120px;/*border: solid 1px #555;*/padding: 5px;margin-top: 10px" class="becenter">
+    								<img id="finalImg" width="100%">
+								</div>
+						      	<div class="change">
+						      		<ul>
+                                          <li><span class="glyphicon glyphicon-camera"></span><label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+                                                <input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden touxiang">
+                                                修改头像
+                                            </label></li>
+                                          
+						      			<li><span class="glyphicon glyphicon-edit"></span><a href="javascript:tab()" class="changepasswd">&nbsp;修改密码</a></li>
+						      		</ul>
+						      	</div>
+						      </div>
+
+
+
+						      <div class="col-md-8 col-md-offset-1 basicinfo" >
+						      		<div class="username">
+						      			<label class="col-md-2 control-label">用户名:</label>
+						      			<label class="col-md-9" style="margin-left: 10px" id="username">Cheuk Fung</label>
+						      		</div>
+						      		<div class="form-group">
+						      			<label class="col-md-2 control-label">原密码：</label>
+						      			<div class="col-md-9">
+						      				<input type="password" class="form-control" name="oldpwd"  theone="false" id="oldpwd">
+						      			<!-- <div class="lable-name-desc" style="">昵称只能由大小写字母，下划线组成</div> -->
+						      			<!-- <span class="error error1">昵称只能由大小写字母，下划线组成</span> -->
+						      			</div>
+						      		</div>
+						      		<div class="form-group">
+						      			<label class="col-md-2 control-label">新密码：</label>
+						      			<div class="col-md-9">
+						      				<input type="password" class="form-control" placeholder="密码(8-30位)" name="pwd" id="pwd">
+						      			<!-- <div class="emailformat" >请输入正确的邮箱格式！</div> -->
+						      			<span class="error error2"></span>
+						      			</div>
+						      		</div>
+						      		<div class="form-group">
+						      			<label class="col-md-2 control-label">确认新密码：</label>
+						      			<div class="col-md-9">
+						      				<input type="password" class="form-control" placeholder="确认新密码" name="password_confirmation" id="password_confirmation">
+						      				<span class="error error3"></span>
+						      			</div>
+						      		</div>
+						      		<input type="button" class="savepwd btn btn-warning"  value="确认修改">
+						      		<input type="button" class="back btn btn-primary" name="button" value="返回" onclick="tab()">
+						      </div>
+
+		 				 </form>
+
+
+					</div>
+						<!-- <div class="footer-bottom">
+							<h5>感谢使用Bedgasm Blog</h5>
+							<i class="fa fa-copyright"></i> Copyright 2018 Bedgasm Blog. All Rights Reserved.<br>
+
+						</div> -->
+					</div>
+		    	</div>
+
+
+	</div>
+</div> 
+<script src="js/bootstrap.min.js"></script> 
+<script src="js/admin-scripts.js"></script> 
+<script type="text/javascript" src="js/prompt.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+<script type="text/javascript" src="js/personinfo.js"></script>
+<script type="text/javascript" src="js/base64.js"></script>
+
+<script>
+	function tab(){
+		$(".infoForm").toggle();
+		$(".pwdForm").toggle();
+	}
+   
+
+</script>
+
+</body>
+</html>

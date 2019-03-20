@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="CheukFung" content="">
+    <title>Pets' hope</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/write.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/cityselect.css"> 
+    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="css/prompt-box.css"> 
+
+    <script src="js/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle na vigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a id="navlogo" href="index.html"></a></li>
+                <li>
+                    <a href="index.html">首页</a>
+                </li>
+                <li>
+                    <a href="adoption.html">领养</a>
+                </li>
+                <li>
+                    <a href="salvation.html">救助</a>
+                </li>
+                <li>
+                    <a href="courtship.html">求偶</a>
+                </li>
+                <li>
+                    <a href="knowledge.html">知识</a>
+                </li>
+            </ul>
+
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a id="login-button" class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal()">登录</a>
+                </li>
+                <li>
+                    <a id="signin-button" class="btn big-register" data-toggle="modal" href="javascript:void(0)"
+                        onclick="openRegisterModal();">注册</a>
+                </li>
+                <li id="account" style="display: none;">
+                    <a id="accountname" onmouseover="showPromptBox()" onmouseout="closePromptBox()"></a>
+                </li>
+            </ul>
+
+
+
+            <section id="search">
+                <!-- Search form -->
+                <form class="navbar-form navbar-right" action="#" onSubmit="return false;" method="get">
+                    <input id="searchkey" type="text" onFocus="if (this.value =='Search..' ) this.value=''" onBlur="if (this.value=='') this.value='Search..'"
+                        value="Search.." name="q">
+                    <input type="button" value="" onclick="searchClickAjax()">
+                </form>
+            </section>
+        </div>
+        <!--/.nav-collapse -->
+        <div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
+
+            <p>
+                <a onclick="gohome()">我的发布</a>
+            </p>
+            <p>
+                <a onclick="gomanager()">我的收藏</a>
+            </p>
+
+            <p>
+                <a onclick="logout()">设置</a>
+            </p>
+            <p>
+                <a onclick="logout()">退出登陆</a>
+            </p>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row write-container">
+            <div class="header clearfix">
+                        <h2 class="main-title">分享养宠知识</h2>       
+             </div>   
+
+            <div class="form-group clearfix">
+                <label class="col-md-2 control-label">图片：</label>
+                <div class="col-md-9" id="pet-pictures">
+                    <input type="file" id="addpicturehide" value="添加图片" />
+                    <input type="button" id="addpicture" value="添加图片" />
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                    <label class="col-md-2 control-label">标   题:</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="title" placeholder="">
+                    </div>
+            </div>
+            <div class="form-group clearfix">
+                    <label class="col-md-2 control-label">详情描述:</label>
+                    <div class="col-md-9">
+                        <textarea class="form-control description " id="detail" name="description" placeholder="请输入详细描述"></textarea>
+                    </div>
+            </div>
+            <div class="form-group clearfix">
+                <div class="col-md-2">
+                    <input type="submit" class="saveinfo btn btn-primary" name="submit" value="分享养宠知识">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <footer class="footer ">
+
+        <div class="footer-bottom ">
+            <h5>感谢使用Petsweb宠物服务交流平台</h5>
+            <i class="fa fa-copyright "></i> Copyright 2019 CheukFung. All Rights Reserved.<br>
+
+        </div>
+
+    </footer>
+
+    <script src="js/moment-with-locales.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="js/bootstrap.min.js "></script>
+    <script src="js/jquery.bxslider.js "></script>
+    <script src="js/mooz.scripts.min.js "></script>
+    <script src="js/cityselect.js"></script>
+    <script type="text/javascript" src="js/prompt.js "></script>
+
+    <script type="text/javascript" src="js/login.js "></script>
+    <script type="text/javascript">
+        var test=new Vcity.CitySelector({input:'citySelect'});
+    </script>
+
+    <script>
+        var $addPicturehide = $('#addpicturehide')
+        var $addPicture = $('#addpicture')
+        $addPicture.on('click', function () {
+            $addPicturehide.click()
+        })
+        $addPicturehide.on('change', function (e) {
+            var reader = new FileReader();
+            var file = this.files[0]
+            if (!/image\/\w+/.test(file.type)) {
+                alert("请确保文件为图像类型！");
+                return false;
+            }
+            reader.readAsDataURL(file);
+            reader.onload = function (e) {
+                var $img = $(document.createElement('img'))
+                $img.attr('src', this.result)
+                $img.attr('class', 'pet-picture')
+                var $hover = $(document.createElement('div'))
+                $hover.attr('class', 'pet-picture-hover')
+
+                var $holder = $(document.createElement('div'))
+                $holder.attr('class', 'pet-picture-holder')
+                $holder.append($img)
+                $holder.append($hover)
+
+                $hover.on('click', function () {
+                    $(this).parent().remove()
+                })
+
+                $addPicturehide.before($holder)
+            }
+        })
+    </script>
+    <script>
+        $(function(){
+            $('#datetimepicker1').datetimepicker({
+        language: 'zh-CN',//显示中文
+        format: 'yyyy-mm-dd',//显示格式
+        minView: "month",//设置只显示到月份
+        initialDate: new Date(),
+        autoclose: true,//选中自动关闭
+        todayBtn: true,//显示今日按钮
+        locale: moment.locale('zh-cn')
+    });
+        }
+        );
+        function Datetime() {
+    
+    //默认获取当前日期
+    var today = new Date();
+    var nowdate = (today.getFullYear()) + "-" + (today.getMonth() + 1) + "-" + today.getDate();
+    //对日期格式进行处理
+    var date = new Date(nowdate);
+    var mon = date.getMonth() + 1;
+    var day = date.getDate();
+    var mydate = date.getFullYear() + "-" + (mon < 10 ? "0" + mon : mon) + "-" + (day < 10 ? "0" + day : day);
+    document.getElementById("nowdate").value = mydate;
+    }
+
+    </script>
+</body>
+
+</html>
