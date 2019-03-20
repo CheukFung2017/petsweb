@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xml="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table>
+       <tr>
+           <th>id</th>
+           <th>name</th>
+       </tr>
+        <tr each="user : $(users)">
+            <td text="$(user.id"></td>
+            <td text="$(user.name"></td>
+        </tr>
+    </table>
+</body>
+</html>

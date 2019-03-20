@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuofeng.petsweb.dao.TSavepetMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuofeng.petsweb.entity.TSavepet" >
+    <id column="savepet_id" property="savepetId" jdbcType="INTEGER" />
+    <result column="fingdate" property="fingdate" jdbcType="VARCHAR" />
+    <result column="post_id" property="postId" jdbcType="INTEGER" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="is_saved" property="isSaved" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    savepet_id, fingdate, post_id, type_id, is_saved
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_savepet
+    where savepet_id = #{savepetId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_savepet
+    where savepet_id = #{savepetId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhuofeng.petsweb.entity.TSavepet" >
+    insert into t_savepet (savepet_id, fingdate, post_id, 
+      type_id, is_saved)
+    values (#{savepetId,jdbcType=INTEGER}, #{fingdate,jdbcType=VARCHAR}, #{postId,jdbcType=INTEGER}, 
+      #{typeId,jdbcType=INTEGER}, #{isSaved,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuofeng.petsweb.entity.TSavepet" >
+    insert into t_savepet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="savepetId != null" >
+        savepet_id,
+      </if>
+      <if test="fingdate != null" >
+        fingdate,
+      </if>
+      <if test="postId != null" >
+        post_id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="isSaved != null" >
+        is_saved,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="savepetId != null" >
+        #{savepetId,jdbcType=INTEGER},
+      </if>
+      <if test="fingdate != null" >
+        #{fingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="isSaved != null" >
+        #{isSaved,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuofeng.petsweb.entity.TSavepet" >
+    update t_savepet
+    <set >
+      <if test="fingdate != null" >
+        fingdate = #{fingdate,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        post_id = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="isSaved != null" >
+        is_saved = #{isSaved,jdbcType=INTEGER},
+      </if>
+    </set>
+    where savepet_id = #{savepetId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuofeng.petsweb.entity.TSavepet" >
+    update t_savepet
+    set fingdate = #{fingdate,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      is_saved = #{isSaved,jdbcType=INTEGER}
+    where savepet_id = #{savepetId,jdbcType=INTEGER}
+  </update>
+</mapper>

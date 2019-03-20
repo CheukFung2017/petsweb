@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuofeng.petsweb.dao.TFindpetMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuofeng.petsweb.entity.TFindpet" >
+    <id column="findpet_id" property="findpetId" jdbcType="INTEGER" />
+    <result column="pet_name" property="petName" jdbcType="VARCHAR" />
+    <result column="losedate" property="losedate" jdbcType="VARCHAR" />
+    <result column="post_id" property="postId" jdbcType="INTEGER" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="is_found" property="isFound" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    findpet_id, pet_name, losedate, post_id, type_id, is_found
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_findpet
+    where findpet_id = #{findpetId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_findpet
+    where findpet_id = #{findpetId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhuofeng.petsweb.entity.TFindpet" >
+    insert into t_findpet (findpet_id, pet_name, losedate, 
+      post_id, type_id, is_found
+      )
+    values (#{findpetId,jdbcType=INTEGER}, #{petName,jdbcType=VARCHAR}, #{losedate,jdbcType=VARCHAR}, 
+      #{postId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{isFound,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuofeng.petsweb.entity.TFindpet" >
+    insert into t_findpet
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="findpetId != null" >
+        findpet_id,
+      </if>
+      <if test="petName != null" >
+        pet_name,
+      </if>
+      <if test="losedate != null" >
+        losedate,
+      </if>
+      <if test="postId != null" >
+        post_id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="isFound != null" >
+        is_found,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="findpetId != null" >
+        #{findpetId,jdbcType=INTEGER},
+      </if>
+      <if test="petName != null" >
+        #{petName,jdbcType=VARCHAR},
+      </if>
+      <if test="losedate != null" >
+        #{losedate,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="isFound != null" >
+        #{isFound,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuofeng.petsweb.entity.TFindpet" >
+    update t_findpet
+    <set >
+      <if test="petName != null" >
+        pet_name = #{petName,jdbcType=VARCHAR},
+      </if>
+      <if test="losedate != null" >
+        losedate = #{losedate,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        post_id = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="isFound != null" >
+        is_found = #{isFound,jdbcType=INTEGER},
+      </if>
+    </set>
+    where findpet_id = #{findpetId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuofeng.petsweb.entity.TFindpet" >
+    update t_findpet
+    set pet_name = #{petName,jdbcType=VARCHAR},
+      losedate = #{losedate,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      is_found = #{isFound,jdbcType=INTEGER}
+    where findpet_id = #{findpetId,jdbcType=INTEGER}
+  </update>
+</mapper>

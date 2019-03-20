@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuofeng.petsweb.dao.TCourtshipMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuofeng.petsweb.entity.TCourtship" >
+    <id column="courtship_id" property="courtshipId" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="variety" property="variety" jdbcType="VARCHAR" />
+    <result column="post_id" property="postId" jdbcType="INTEGER" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
+    <result column="is_married" property="isMarried" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    courtship_id, sex, variety, post_id, type_id, is_married
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_courtship
+    where courtship_id = #{courtshipId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_courtship
+    where courtship_id = #{courtshipId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhuofeng.petsweb.entity.TCourtship" >
+    insert into t_courtship (courtship_id, sex, variety, 
+      post_id, type_id, is_married
+      )
+    values (#{courtshipId,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, #{variety,jdbcType=VARCHAR}, 
+      #{postId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, #{isMarried,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuofeng.petsweb.entity.TCourtship" >
+    insert into t_courtship
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courtshipId != null" >
+        courtship_id,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="variety != null" >
+        variety,
+      </if>
+      <if test="postId != null" >
+        post_id,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+      <if test="isMarried != null" >
+        is_married,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courtshipId != null" >
+        #{courtshipId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="variety != null" >
+        #{variety,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="isMarried != null" >
+        #{isMarried,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuofeng.petsweb.entity.TCourtship" >
+    update t_courtship
+    <set >
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="variety != null" >
+        variety = #{variety,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        post_id = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="isMarried != null" >
+        is_married = #{isMarried,jdbcType=INTEGER},
+      </if>
+    </set>
+    where courtship_id = #{courtshipId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuofeng.petsweb.entity.TCourtship" >
+    update t_courtship
+    set sex = #{sex,jdbcType=INTEGER},
+      variety = #{variety,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      is_married = #{isMarried,jdbcType=INTEGER}
+    where courtship_id = #{courtshipId,jdbcType=INTEGER}
+  </update>
+</mapper>
