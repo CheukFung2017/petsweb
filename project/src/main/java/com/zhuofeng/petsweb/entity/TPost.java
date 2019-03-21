@@ -33,6 +33,8 @@ public class TPost {
 
     private long tagId;
 
+    private int typeId;
+
     public Integer getPostId() {
         return postId;
     }
@@ -143,5 +145,13 @@ public class TPost {
 
     public void setTagId(long tagId){
         this.tagId=tagId;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 }

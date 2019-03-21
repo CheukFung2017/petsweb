@@ -1,6 +1,7 @@
 package com.zhuofeng.petsweb.service;
 
 import com.zhuofeng.petsweb.entity.TAdoption;
+import com.zhuofeng.petsweb.entity.TUser;
 
 import java.util.List;
 
@@ -11,5 +12,7 @@ public interface AdoptService {
     List<TAdoption> listAdoption_COUNT();
 
     Integer insertAdoption(TAdoption tAdoption);
+
+    int insertAdopt(TUser user,TAdoption tAdoption);
 
 }

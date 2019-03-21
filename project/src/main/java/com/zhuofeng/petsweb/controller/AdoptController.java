@@ -11,17 +11,14 @@ import com.zhuofeng.petsweb.service.PostService;
 import com.zhuofeng.petsweb.util.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/Adopt")
-@ResponseBody
 public class AdoptController {
     @Autowired
     private AdoptService adoptService;
@@ -57,18 +54,15 @@ public class AdoptController {
     /**
      *
      * @param session
-     * @param tPost
      * @param tAdoption
      * @return
      */
-    @RequestMapping("/add")
-    public Result<TAdoption> addAdoption(HttpSession session, @RequestBody TPost tPost, @RequestBody TAdoption tAdoption){
+    @RequestMapping(value = "/add2",consumes = "application/json; charset=utf-8")
+    public Result<TAdoption> addAdopt(HttpSession session,@RequestBody TAdoption tAdoption){
         TUser user = (TUser)session.getAttribute("user");
-        postService.insertAdoption(user,tPost,tAdoption);
+        adoptService.insertAdopt(user,tAdoption);
         return Result.success(tAdoption);
-
     }
-
 
 
 

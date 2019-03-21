@@ -40,11 +40,13 @@ public class PostServiceimpl implements PostService {
         System.out.println(t.getTitle());
         int postId=t.getPostId();
         tAdoption.setPostId(postId);
-        List<TPhoto> tPhotos = tPost.getPhotos();
-        for (TPhoto tPhoto : tPhotos){
-            tPhoto.setPostId(postId);
+        if(tPost.getPhotos()!=null) {
+            List<TPhoto> tPhotos = tPost.getPhotos();
+            for (TPhoto tPhoto : tPhotos) {
+                tPhoto.setPostId(postId);
+            }
+            photoService.insertPhoto(tPhotos);
         }
-        photoService.insertPhoto(tPhotos);
         adoptService.insertAdoption(tAdoption);
         return 0;
 

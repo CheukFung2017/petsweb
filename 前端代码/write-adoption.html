@@ -16,7 +16,8 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/cityselect.css"> 
     <link rel="stylesheet" href="css/prompt-box.css"> 
-
+    
+    <script src="js/sweetalert2.all.min.js"></script>
     <script src="js/jquery.min.js"></script>
 </head>
 
@@ -112,13 +113,13 @@
                 <label class="col-md-2 control-label">宠物种类：</label>
                 <div class="col-md-9">
                     <label class="radio-inline">
-                        <input type="radio" name="type" id="dog" value="dog"> 狗
+                        <input type="radio" name="type" id="dog" value="1"> 狗
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="type" id="cat" value="cat"> 猫
+                        <input type="radio" name="type" id="cat" value="2"> 猫
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="type" id="other" value="other"> 其它
+                        <input type="radio" name="type" id="other" value="0"> 其它
                     </label>
 
                 </div>
@@ -127,17 +128,18 @@
                 <label class="col-md-2 control-label">宠物性别：</label>
                 <div class="col-md-9">
                     <label class="radio-inline">
-                        <input type="radio" name="sex" id="male" value="male"> 公
+                        <input type="radio" name="sex" id="male" value="1"> 公
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="sex" id="female" value="female"> 母
+                        <input type="radio" name="sex" id="female" value="2"> 母
                     </label>
+                    
                 </div>
             </div>
             <div class="form-group clearfix">
                 <label class="col-md-2 control-label">宠物年龄：</label>
                 <div class="col-md-9">
-                    <select class="form-control">
+                    <select class="form-control" id="age">
                         <option>小于1岁</option>
                         <option>1岁</option>
                         <option>2岁</option>
@@ -155,13 +157,13 @@
                 <label class="col-md-2 control-label">是否疫苗：</label>
                 <div class="col-md-9">
                     <label class="radio-inline">
-                        <input type="radio" name="whetherimmune" id="immune" value="immune"> 是
+                        <input type="radio" name="whetherimmune" id="immune" value="1"> 是
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="whetherimmune" id=unimmune value="“unimmune”"> 否
+                        <input type="radio" name="whetherimmune" id=unimmune value="2"> 否
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="whetherimmune" id=dkimmune value="unknow"> 不详
+                        <input type="radio" name="whetherimmune" id=dkimmune value="0"> 不详
                     </label>
                 </div>
             </div>
@@ -169,13 +171,13 @@
                 <label class="col-md-2 control-label">是否绝育：</label>
                 <div class="col-md-9">
                     <label class="radio-inline">
-                        <input type="radio" name="whethersterilized" id="sterilized" value="sterilized"> 是
+                        <input type="radio" name="whethersterilized" id="sterilized" value="1"> 是
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="whethersterilized" id=unsterilized value="unsterilized"> 否
+                        <input type="radio" name="whethersterilized" id=unsterilized value="2"> 否
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="whethersterilized" id=dksterilized value="unknow"> 不详
+                        <input type="radio" name="whethersterilized" id=dksterilized value="0"> 不详
                     </label>
                 </div>
             </div>
@@ -223,7 +225,7 @@
             </div>
             <div class="form-group clearfix">
                 <div class="col-md-2">
-                    <input type="submit" class="saveinfo btn btn-primary" name="submit" value="发布领养">
+                    <input type="submit" class="saveinfo btn btn-primary" name="submit" value="发布领养" onclick="addAdoption()">
                 </div>
             </div>
 
@@ -249,62 +251,62 @@
         var test=new Vcity.CitySelector({input:'citySelect'});
     </script>
 		<script type="text/javascript" src="js/prompt.js "></script>
-
+        <script type="text/javascript" src="js/writeAdopt.js"></script>
     <script>
-        var $addPicturehide = $('#addpicturehide')
-        var $addPicture = $('#addpicture')
-        $addPicture.on('click', function () {
-            $addPicturehide.click()
-        })
-        $addPicturehide.on('change', function (e) {
-            var reader = new FileReader();
-            var file = this.files[0]
-            if (!/image\/\w+/.test(file.type)) {
-                alert("请确保文件为图像类型！");
-                return false;
-            }
-             var formData=new FormData();
-                    formData.append('smfile',file);
-                    
-                    $.ajax({
-                        url: 'https://sm.ms/api/upload',
-                        type: 'POST',
-                        success: function(data){
-                            console.log(data);
-                //             $('#res').html(JSON.stringify(data.data.url));
-                        },
-                        error: function(data){
-                            console.log(data);
-                        },
-                        
-                        data:formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false
-                        
-                    });
-            reader.readAsDataURL(file);
-            reader.onload = function (e) {
-                var $img = $(document.createElement('img'))
-                $img.attr('src', this.result)
-                $img.attr('class', 'pet-picture')
-                var $hover = $(document.createElement('div'))
-                $hover.attr('class', 'pet-picture-hover')
+        // var $addPicturehide = $('#addpicturehide')
+        // var $addPicture = $('#addpicture')
+        // $addPicture.on('click', function () {
+        //     $addPicturehide.click()
+        // })
+        // $addPicturehide.on('change', function (e) {
+        //     var reader = new FileReader();
+        //     var file = this.files[0]
+        //     if (!/image\/\w+/.test(file.type)) {
+        //         alert("请确保文件为图像类型！");
+        //         return false;
+        //     }
+        //      var formData=new FormData();
+        //             formData.append('smfile',file);
+        //             
+        //             $.ajax({
+        //                 url: 'https://sm.ms/api/upload',
+        //                 type: 'POST',
+        //                 success: function(data){
+        //                     console.log(data);
+        //         //             $('#res').html(JSON.stringify(data.data.url));
+        //                 },
+        //                 error: function(data){
+        //                     console.log(data);
+        //                 },
+        //                 
+        //                 data:formData,
+        //                 cache: false,
+        //                 contentType: false,
+        //                 processData: false
+        //                 
+        //             });
+        //     reader.readAsDataURL(file);
+        //     reader.onload = function (e) {
+        //         var $img = $(document.createElement('img'))
+        //         $img.attr('src', this.result)
+        //         $img.attr('class', 'pet-picture')
+        //         var $hover = $(document.createElement('div'))
+        //         $hover.attr('class', 'pet-picture-hover')
                 
-                var $holder = $(document.createElement('div'))
-                $holder.attr('class', 'pet-picture-holder')
-                $holder.append($img)
-                $holder.append($hover)
+        //         var $holder = $(document.createElement('div'))
+        //         $holder.attr('class', 'pet-picture-holder')
+        //         $holder.append($img)
+        //         $holder.append($hover)
 
-                $hover.on('click', function () { 
-                    $(this).parent().remove()
-                })
+        //         $hover.on('click', function () { 
+        //             $(this).parent().remove()
+        //         })
 
-                $addPicturehide.before($holder)
+        //         $addPicturehide.before($holder)
 
-            }
+        //     }
 
-        })
+        // })
     </script>
 
 </body>

@@ -14,11 +14,12 @@
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="pet_type" property="petType" jdbcType="INTEGER" />
     <result column="author_id" property="authorId" jdbcType="INTEGER" />
+    <result column="type_id" property="typeId" jdbcType="INTEGER" />
     <result column="tag_id" property="tagId" jdbcType="BIGINT" />
   </resultMap>
   <sql id="Base_Column_List" >
     post_id, title, summary, updated, replycount, description, contactname, phone, city, 
-    address, pet_type, author_id
+    address, pet_type, author_id, type_id, tag_id
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -41,12 +42,12 @@
     insert into t_post (post_id, title, summary, 
       updated, replycount, description, 
       contactname, phone, city, 
-      address, pet_type, author_id,tag_id
+      address, pet_type, author_id,type_id,tag_id
       )
     values (#{postId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{summary,jdbcType=VARCHAR}, 
       #{updated,jdbcType=VARCHAR}, #{replycount,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
       #{contactname,jdbcType=VARCHAR}, #{phone,jdbcType=BIGINT}, #{city,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{petType,jdbcType=INTEGER}, #{authorId,jdbcType=INTEGER}, #{tagId,jdbcType=BIGINT}
+      #{address,jdbcType=VARCHAR}, #{petType,jdbcType=INTEGER}, #{authorId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER },#{tagId,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zhuofeng.petsweb.entity.TPost" >
@@ -87,6 +88,9 @@
       </if>
       <if test="authorId != null" >
         author_id,
+      </if>
+      <if test="typeId != null">
+        type_id,
       </if>
       <if test="tagId != null">
         tag_id,
@@ -130,6 +134,9 @@
       <if test="authorId != null" >
         #{authorId,jdbcType=INTEGER},
       </if>
+      <if test="typeId !=null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
       <if test="tagId !=null">
         #{tagId,jdbcType=BIGINT},
       </if>
@@ -171,6 +178,9 @@
       <if test="authorId != null" >
         author_id = #{authorId,jdbcType=INTEGER},
       </if>
+      <if test="typeId !=null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
       <if test="tagId !=null">
         tag_id= #{tagId,jdbcType=BIGINT},
       </if>
@@ -190,6 +200,7 @@
       address = #{address,jdbcType=VARCHAR},
       pet_type = #{petType,jdbcType=INTEGER},
       author_id = #{authorId,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
       tag_id= #{tagId,jdbcType=BIGINT}
     where post_id = #{postId,jdbcType=INTEGER}
   </update>
