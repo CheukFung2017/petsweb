@@ -36,11 +36,15 @@ public class AdoptController {
      * @return
      */
     @RequestMapping("/home_adopt")
-    public Result<Object> toList(int pageNum, int pageSize){
-        String orderby = "t_post.updated desc";
+    public Result<Object> toList(@RequestParam int pageNum, @RequestParam int pageSize){
+//        String orderby = "t_post.post_id desc";
 //        String orderby="t_post.phone";
-        List<TAdoption> tAdoptions = adoptService.listAdoption();
+        String orderby = "t_adoption.adopt_id desc";
+
+
+
         PageHelper.startPage(pageNum,pageSize,orderby);
+        List<TAdoption> tAdoptions = adoptService.listAdoption();
 //        List<TAdoption> tAdoptions1 = adoptService.listAdoption_COUNT();
 
         PageInfo<TAdoption> pageInfo=new PageInfo<>(tAdoptions);

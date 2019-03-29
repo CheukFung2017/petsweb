@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="CheukFung" content="">
+    <title>Pets' hope</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/write.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/cityselect.css"> 
+    <link rel="stylesheet" href="css/prompt-box.css"> 
+    
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+</head>
+
+<body>
+    <!-- 顶部导航栏 -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle na vigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a id="navlogo" href="index.html"></a></li>
+                <li>
+                    <a href="index.html">首页</a>
+                </li>
+                <li>
+                    <a href="adoption.html">领养</a>
+                </li>
+                <li>
+                    <a href="salvation.html">救助</a>
+                </li>
+                <li>
+                    <a href="courtship.html">求偶</a>
+                </li>
+                <li>
+                    <a href="knowledge.html">知识</a>
+                </li>
+            </ul>
+
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a id="login-button" class="btn big-login" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal()">登录</a>
+                </li>
+                <li>
+                    <a id="signin-button" class="btn big-register" data-toggle="modal" href="javascript:void(0)"
+                        onclick="openRegisterModal();">注册</a>
+                </li>
+                <li id="account" style="display: none;">
+                    <a id="accountname" onmouseover="showPromptBox()" onmouseout="closePromptBox()"></a>
+                </li>
+            </ul>
+
+
+
+            <section id="search">
+                <!-- Search form -->
+                <form class="navbar-form navbar-right" action="#" onSubmit="return false;" method="get">
+                    <input id="searchkey" type="text" onFocus="if (this.value =='Search..' ) this.value=''" onBlur="if (this.value=='') this.value='Search..'"
+                        value="Search.." name="q">
+                    <input type="button" value="" onclick="searchClickAjax()">
+                </form>
+            </section>
+        </div>
+        <!--/.nav-collapse -->
+        <div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
+
+            <p>
+                <a onclick="gohome()">我的发布</a>
+            </p>
+            <p>
+                <a onclick="gomanager()">我的收藏</a>
+            </p>
+
+            <p>
+                <a onclick="logout()">设置</a>
+            </p>
+            <p>
+                <a onclick="logout()">退出登陆</a>
+            </p>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row write-container">
+            <div class="header clearfix">
+                        <h2 class="main-title">发布领养信息</h2>       
+             </div>   
+            <div class="form-group clearfix">
+                <label class="col-md-2 control-label">宠物昵称:</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="pet_name" placeholder="请输入宠物昵称">
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-md-2 control-label">宠物种类：</label>
+                <div class="col-md-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="type" id="dog" value="1"> 狗
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="type" id="cat" value="2"> 猫
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="type" id="other" value="0"> 其它
+                    </label>
+
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-md-2 control-label">宠物性别：</label>
+                <div class="col-md-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="sex" id="male" value="1"> 公
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="sex" id="female" value="2"> 母
+                    </label>
+                    
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-md-2 control-label">宠物年龄：</label>
+                <div class="col-md-9">
+                    <select class="form-control" id="age">
+                        <option>小于1岁</option>
+                        <option>1岁</option>
+                        <option>2岁</option>
+                        <option>3岁</option>
+                        <option>4岁</option>
+                        <option>5岁</option>
+                        <option>6岁</option>
+                        <option>7岁</option>
+                        <option>8岁</option>
+                        <option>大于8岁</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-md-2 control-label">是否疫苗：</label>
+                <div class="col-md-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="whetherimmune" id="immune" value="1"> 是
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="whetherimmune" id=unimmune value="2"> 否
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="whetherimmune" id=dkimmune value="0"> 不详
+                    </label>
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                <label class="col-md-2 control-label">是否绝育：</label>
+                <div class="col-md-9">
+                    <label class="radio-inline">
+                        <input type="radio" name="whethersterilized" id="sterilized" value="1"> 是
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="whethersterilized" id=unsterilized value="2"> 否
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="whethersterilized" id=dksterilized value="0"> 不详
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group clearfix">
+                    <label class="col-md-2 control-label">联系人:</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="contact_name" placeholder="联系人姓名">
+                    </div>
+            </div>
+            <div class="form-group clearfix">
+                    <label class="col-md-2 control-label">联系电话:</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="contact_phone" placeholder="请输入联系电话">
+                    </div>
+            </div>
+            <div class="form-group clearfix">
+                    <div class="selectcity">
+                            <!-- <div class="citychoose">领养城市：</div> -->
+                            <label class="col-md-2 control-label citychoose">领养城市:</label>
+                            <div class="demo col-md-9">
+                                <input type="text" class="cityinput" id="citySelect" placeholder="请输入目的城市">
+                            </div>
+                        </div>
+            </div>
+
+            <div class="form-group clearfix">
+                <label class="col-md-2 control-label">宠物图片：</label>
+                <div class="col-md-9" id="pet-pictures">
+                    <input type="file" id="addpicturehide" value="添加图片" />
+                    <input type="button" id="addpicture" value="添加图片" />
+                </div>
+            </div>
+            <div class="form-group clearfix">
+                    <label class="col-md-2 control-label">标   题:</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" id="title" placeholder="（例如：我有一只小橘猫想找个好人家哦）">
+                    </div>
+            </div>
+            <div class="form-group clearfix">
+                    <label class="col-md-2 control-label">详情描述:</label>
+                    <div class="col-md-9">
+                        <textarea class="form-control description" id="detail" name="description" placeholder="请输入详细描述(如宠物性格、喜欢吃什么及领养条件等）"></textarea>
+                    </div>
+            </div>
+            <div class="form-group clearfix">
+                <div class="col-md-2">
+                    <input type="submit" class="saveinfo btn btn-primary" name="submit" value="发布领养" onclick="addAdoption()">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <footer class="footer ">
+
+        <div class="footer-bottom ">
+            <h5>感谢使用Petsweb宠物服务交流平台</h5>
+            <i class="fa fa-copyright "></i> Copyright 2019 CheukFung. All Rights Reserved.<br>
+
+        </div>
+
+    </footer>
+
+    <script src="js/bootstrap.min.js "></script>
+    <script src="js/jquery.bxslider.js "></script>
+    <script src="js/mooz.scripts.min.js "></script>
+    <script src="js/cityselect.js"></script>
+    <script type="text/javascript" src="js/login.js "></script>
+    <script type="text/javascript">
+        var test=new Vcity.CitySelector({input:'citySelect'});
+    </script>
+		<script type="text/javascript" src="js/prompt.js "></script>
+        <script type="text/javascript" src="js/writeAdopt.js"></script>
+
+</body>
+
+</html>

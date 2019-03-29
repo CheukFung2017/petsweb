@@ -3,6 +3,8 @@ package com.zhuofeng.petsweb.dao;
 import com.zhuofeng.petsweb.entity.TPost;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TPostMapper {
     int deleteByPrimaryKey(Integer postId);
@@ -18,4 +20,6 @@ public interface TPostMapper {
     int updateByPrimaryKeySelective(TPost record);
 
     int updateByPrimaryKey(TPost record);
+
+    List<TPost> listUserPost(Integer userId);
 }

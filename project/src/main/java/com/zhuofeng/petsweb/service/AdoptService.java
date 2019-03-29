@@ -15,4 +15,6 @@ public interface AdoptService {
 
     int insertAdopt(TUser user,TAdoption tAdoption);
 
+    TAdoption fingByPostId(Integer postId);
+
 }

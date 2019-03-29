@@ -4,6 +4,13 @@ import com.zhuofeng.petsweb.entity.TAdoption;
 import com.zhuofeng.petsweb.entity.TPost;
 import com.zhuofeng.petsweb.entity.TUser;
 
+import java.util.List;
+
 public interface PostService {
-    public int insertAdoption(TUser tUser, TPost tPost, TAdoption tAdoption);
+    public TPost getPost(Integer id);
+
+    public Integer updatePost(TPost post);
+
+    public List<TPost> listUserPost(Integer userId);
 }
+

@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PostServiceimpl implements PostService {
@@ -22,34 +24,21 @@ public class PostServiceimpl implements PostService {
     TPostMapper tPostMapper;
     @Autowired
     TPhotoMapper tPhotoMapper;
-    @Autowired
-    private PhotoService photoService;
-    @Autowired
-    private AdoptService adoptService;
 
     @Override
-    @Transactional
-    public int insertAdoption(TUser tUser, TPost tPost, TAdoption tAdoption){
-         int userId = tUser.getUserId();
-         tPost.setAuthorId(userId);
-         long tagId = System.currentTimeMillis();
-         tPost.setTagId(tagId);
-         tPostMapper.insertSelective(tPost);
-          TPost t = tPostMapper.selectByTag(tagId);
-        System.out.println(t);
-        System.out.println(t.getTitle());
-        int postId=t.getPostId();
-        tAdoption.setPostId(postId);
-        if(tPost.getPhotos()!=null) {
-            List<TPhoto> tPhotos = tPost.getPhotos();
-            for (TPhoto tPhoto : tPhotos) {
-                tPhoto.setPostId(postId);
-            }
-            photoService.insertPhoto(tPhotos);
-        }
-        adoptService.insertAdoption(tAdoption);
-        return 0;
+    public TPost getPost(Integer id){
+        return tPostMapper.selectByPrimaryKey(id);
+    }
 
+    @Override
+    public Integer updatePost(TPost post){
+        return tPostMapper.updateByPrimaryKeySelective(post);
+    }
+
+    @Override
+    public List<TPost> listUserPost(Integer userId){
+        Map<String,Object> map = new HashMap<>();
+        return tPostMapper.listUserPost(userId);
     }
 
 }

@@ -24,30 +24,41 @@
       <result column="address" property="address" jdbcType="VARCHAR" />
       <result column="pet_type" property="petType" jdbcType="INTEGER" />
       <result column="author_id" property="authorId" jdbcType="INTEGER" />
-      <collection property="photos" ofType="TPhoto">
-        <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="photo_address" property="photoAddress" jdbcType="VARCHAR" />
-        <result column="post_id" property="postId" jdbcType="INTEGER" />
+      <result column="type_id" property="typeId" jdbcType="INTEGER" />
+      <result column="author" property="author" jdbcType="VARCHAR" />
+      <collection property="photos" ofType="TPhoto" column="post_id" select="getPhotosByPostId" >
+        <!--<id column="id" property="id" jdbcType="INTEGER" />-->
+        <!--<result column="photo_address" property="photoAddress" jdbcType="VARCHAR" />-->
+        <!--<result column="post_id" property="postId" jdbcType="INTEGER" />-->
       </collection>
     </association>
   </resultMap>
   <sql id="Base_Column_List" >
-    adopt_id, pet_name, sex, t_adoption.post_id, type_id, is_adopted,title,updated,replycount,city,pet_type,photo_address,id
+    adopt_id, pet_name, sex, t_adoption.post_id, t_post.type_id, is_adopted,title,summary,updated,replycount,city,pet_type,photo_address,id
+  </sql>
+  <sql id="Base_Column_List2">
+    adopt_id,pet_name,sex,post_id,is_adopted
   </sql>
   <sql id="fromTable">
     t_adoption left join t_post on t_adoption.post_id = t_post.post_id left join t_photo on t_post.post_id = t_photo.post_id
   </sql>
+  <select id="getPhotosByPostId" resultType="map"  parameterType="java.lang.Integer" >
+    select id,photo_address
+    from t_photo where t_photo.post_id=#{postId}
+
+  </select>
+
   <select id="listAdoption" resultMap="BaseResultMap" parameterType="java.util.Map">
-    select 
-    <include refid="Base_Column_List"/>
-    from <include refid="fromTable"/>
+    select
+    adopt_id, pet_name, sex, t_adoption.post_id, t_post.type_id, is_adopted,title,summary,updated,replycount,city,pet_type
+    from t_adoption left join t_post on t_adoption.post_id = t_post.post_id
 
   </select>
 
   <select id="listAdoption_COUNT" resultMap="BaseResultMap" parameterType="java.util.Map">
     select
-    <include refid="Base_Column_List"/>
-    from <include refid="fromTable"/>
+    <include refid="Base_Column_List2"/>
+    from t_adoption
   </select>
   
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -55,6 +66,13 @@
     <include refid="Base_Column_List" />
     from t_adoption
     where adopt_id = #{adoptId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByPostId" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    adopt_id, pet_name, sex, age,contactname,phone,sterilized, immune,description, t_adoption.post_id, t_post.type_id, is_adopted,title,summary,updated,replycount,city,pet_type,author
+    from t_adoption left join t_post on t_adoption.post_id = t_post.post_id
+    where t_adoption.post_id = #{postId,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_adoption

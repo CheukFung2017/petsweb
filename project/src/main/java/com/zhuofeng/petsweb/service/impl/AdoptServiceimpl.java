@@ -48,9 +48,10 @@ public class AdoptServiceimpl implements AdoptService {
     @Transactional
     public int insertAdopt(TUser tUser,TAdoption tAdoption){
         int userId = tUser.getUserId();
-
+        String author = tUser.getUserName();
         TPost tPost = tAdoption.getPost();
         tPost.setAuthorId(userId);
+        tPost.setAuthor(author);
         long tagId = System.currentTimeMillis();
         tPost.setTagId(tagId);
         tPost.setTypeId(1);
@@ -70,4 +71,10 @@ public class AdoptServiceimpl implements AdoptService {
         adoptService.insertAdoption(tAdoption);
         return 1;
     }
+
+    @Override
+    public  TAdoption fingByPostId(Integer postId){
+        return tAdoptionMapper.selectByPostId(postId);
+    }
+
 }

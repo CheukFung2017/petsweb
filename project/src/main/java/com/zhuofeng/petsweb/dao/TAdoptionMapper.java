@@ -23,4 +23,6 @@ public interface TAdoptionMapper {
     ArrayList<TAdoption> listAdoption();
 
     ArrayList<TAdoption> listAdoption_COUNT();
+
+    TAdoption selectByPostId(Integer postId);
 }

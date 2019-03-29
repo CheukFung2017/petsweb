@@ -42,7 +42,6 @@ $('.touxiang').change(function(){
 
 
 function loadInfo(){
-    console.log("testtest");
     var settings = {
         url: "http://localhost:8080/user/userinfobyid",
           crossDomain:"true",

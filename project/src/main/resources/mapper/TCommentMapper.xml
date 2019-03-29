@@ -7,10 +7,12 @@
     <result column="comment_date" property="commentDate" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="post_id" property="postId" jdbcType="INTEGER" />
+    <association property="user" column="user_id" select="com.zhuofeng.petsweb.dao.TUserMapper.selectByPrimaryKey"></association>
   </resultMap>
   <sql id="Base_Column_List" >
     comment_id, content, comment_date, user_id, post_id
   </sql>
+
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -90,4 +92,25 @@
       post_id = #{postId,jdbcType=INTEGER}
     where comment_id = #{commentId,jdbcType=INTEGER}
   </update>
+
+  <select id="listComment" parameterType="Map" resultMap="BaseResultMap">
+    select * from t_comment
+    <where>
+      <if test="post_id!=null">
+        and post_id=#{postId}
+      </if>
+      <if test="user_id!=null">
+        and user_id=#{userId}
+      </if>
+    </where>
+    order by comment_date desc
+  </select>
+
+  <select id="getTotalByPostId" parameterType="java.lang.Integer" resultType="java.lang.Long">
+    	SELECT COUNT(*) FROM t_comment where post_id=#{postId}
+    </select>
+
+  <select id="getTotalByUserId" parameterType="java.lang.Integer" resultType="java.lang.Long">
+    	SELECT COUNT(id) FROM t_comment where user_id=#{userId}
+    </select>
 </mapper>

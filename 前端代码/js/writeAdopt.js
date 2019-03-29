@@ -13,6 +13,27 @@ var authorId=sessionStorage.getItem("id");
 // var phone = $('#contact_phone').val();
 // var city = $('#citySelect').val();
 
+Date.prototype.format = function(fmt) { 
+    var o = { 
+       "M+" : this.getMonth()+1,                 //月份 
+       "d+" : this.getDate(),                    //日 
+       "h+" : this.getHours(),                   //小时 
+       "m+" : this.getMinutes(),                 //分 
+       "s+" : this.getSeconds(),                 //秒 
+       "q+" : Math.floor((this.getMonth()+3)/3), //季度 
+       "S"  : this.getMilliseconds()             //毫秒 
+   }; 
+   if(/(y+)/.test(fmt)) {
+           fmt=fmt.replace(RegExp.$1, (this.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+   }
+    for(var k in o) {
+       if(new RegExp("("+ k +")").test(fmt)){
+            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length)));
+        }
+    }
+   return fmt; 
+}       
+
 
 //上传图片处理
 var $addPicturehide = $('#addpicturehide');
@@ -106,10 +127,11 @@ function addAdoption(){
     var city = $('#citySelect').val();
     var title = $('#title').val();
     var description = $('#detail').val();
-    var summary = description.substr(0,66);
+    var summary = description.substr(0,50);
     summary = summary+"...";
-    var myDate = new Date();
-    var updated=myDate.toLocaleTimeString(); 
+    // var myDate = new Date();
+    var updated = new Date().format("yyyy-MM-dd hh:mm:ss");
+    // var updated=myDate.toLocaleTimeString(); 
     console.log("username: "+username);
     console.log("sex: "+sex);
     console.log("petType: "+petType);
@@ -119,6 +141,12 @@ function addAdoption(){
     console.log("title: "+title);
     console.log("detail: "+description);
     console.log("summary: "+summary);
+
+    if(photos.length==0){
+        var p2 ={};
+                    p2.photoAddress="https://i.loli.net/2019/03/25/5c9893c3d7bf5.jpeg";
+                    photos.push(p2);
+    }
 
     if(title == null || title == ''){
         swal("系统提示:请输入标题！","","warning");

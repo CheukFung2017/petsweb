@@ -11,6 +11,16 @@ public class TComment {
 
     private Integer postId;
 
+    public TUser getUser() {
+        return user;
+    }
+
+    public void setUser(TUser user) {
+        this.user = user;
+    }
+
+    private TUser user;
+
     public Integer getCommentId() {
         return commentId;
     }

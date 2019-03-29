@@ -35,6 +35,17 @@ public class TPost {
 
     private int typeId;
 
+    private String author;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+
     public Integer getPostId() {
         return postId;
     }
