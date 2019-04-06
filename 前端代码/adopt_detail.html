@@ -15,6 +15,8 @@
         <link rel="stylesheet" href="css/article.css">
         <link rel="stylesheet" href="css/detail.css">
         <link rel="stylesheet" href="css/prompt-box.css"> 
+        <link rel="stylesheet" href="css/cityselect.css"> 
+
         <script src="js/sweetalert2.all.min.js"></script>
 
         <script src="js/jquery.min.js"></script>
@@ -172,21 +174,22 @@
 				<div class="col-md-8">
 					<article class="blog-post">
 						<div class="blog-post-body">
-							<h2>英短银渐层猫免费送养</h2>
+							<h2 class="title"></h2>
 							<div class="post-meta">
                                 <span class="author"></a></span>/<span class="updated"></span>/&nbsp;&nbsp; <span<i class="fa fa-comment-o replycount"></i> </span>
                             </div>
                             <div class="adopt_content clearfix">
                                     <div class="pet_message clearfix">
                                         <div>昵称：<span class="pet_name"></span></div>
-                                        <div>种类：<span class="pet_type">猫</span></div>
-                                        <div>性别：<span class="sex">母</span></div>
-                                        <div>年龄：<span class="age">1岁</span></div>
-                                        <div>是否免疫：<span class="immune">是</span></div>
-                                        <div>是否绝育：<span class="sterilized">否</span></div>
-                                        <div>联系人：<span class="contact_name">陈先生</span></div>
-                                        <div>联系电话：<span class="phone">13011112223</span></div>
-                                        <div>领养城市：<span class="city">广州</span></div>
+                                        <div>种类：<span class="pet_type"></span></div>
+                                        <div>性别：<span class="sex"></span></div>
+                                        <div>年龄：<span class="age"></span></div>
+                                        <div>是否免疫：<span class="immune"></span></div>
+                                        <div>是否绝育：<span class="sterilized"></span></div>
+                                        <div>领养城市：<span class="city"></span></div>
+                                        <div>联系人：<span class="contact_name"></span></div>
+                                        <!-- <div>联系电话：<span class="phone" style="color:red">领养申请通过才能查看</span></div> -->
+                                        <div>领养状态：<span class="adoptstate" style="color:chocolate"></span></div>
 
                                     </div>
                                     <div id="adopt_img" class="carousel slide clearfix">
@@ -196,10 +199,114 @@
                                         
                             </div>
                             <div class="adopt_description clearfix">
-                                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam mollitia dignissimos iste impedit aspernatur accusantium vero, pariatur magnam vel saepe adipisci beatae? Sint veniam vero libero. Nemo repudiandae eveniet ut.
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim necessitatibus alias quos explicabo magnam ratione dolor expedita ullam beatae! Odit suscipit quod quo exercitationem sint culpa recusandae, assumenda nobis delectus.
                             </div>
-						</div>
+                            <button class="btn btn-primary" style="margin-top:30px;width:120px;" data-toggle="modal" data-target="#applyModal">申请领养</button>
+                            <button class="btn btn-default" style="margin-top:30px;width:120px;">收 藏</button>
+
+                           
+                            
+                        </div>
+                        <form method="post"  class="form-horizontal" role="form" id="form_data"  style="margin: 20px;">
+                            <div class="modal fade" id="applyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                                ×
+                                            </button>
+                                            <h4 class="modal-title" id="myModalLabel">
+                                                申请人信息采集
+                                            </h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form class="form-horizontal" role="form">
+                                                <div class="form-group">
+                                                    <label for="applyname" class="col-sm-2 control-label">姓名</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="applyname" name="applyname" 
+                                                               placeholder="请输入您的姓名">
+                                                    </div>
+                                                </div>
+                                               
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">性别</label>
+                                                    <div class="col-sm-9">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="applysex" id="male" value="1"> 男
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="applysex" id="female" value="2"> 女
+                                                        </label>
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class="col-sm-2 control-label">年龄</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" name="applyage" id="applyage"
+                                                               placeholder="您的年龄">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label  class="col-sm-2 control-label">养宠经验</label>
+                                                    <div class="col-sm-9">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="experience" id="has" value="1"> 有经验
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" name="experience" id="hasnot" value="0"> 无经验
+                                                        </label>
+                                                    </div>
+                                                </div>
+                        
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">职业</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text"  class="form-control"  name="job"  id="job"
+                                                               placeholder="您的职业" />
+                         
+                                                        
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="selectcity">
+                                                            <!-- <div class="citychoose">领养城市：</div> -->
+                                                            <label class="col-sm-2 control-label citychoose clearfix">所在城市</label>
+                                                            <div class="demo col-sm-9">
+                                                                <input type="text" class="cityinput" id="citySelect" placeholder="请输入目的城市">
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                                 <div class="form-group">
+                                                    <label class="col-sm-2 control-label">手机号</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text"  class="form-control"  name="applyphone"  id="applyphone"
+                                                               placeholder="请输入您的手机号" />
+                         
+                                                    
+                                                    </div>
+                                                </div>
+                                                <div class="form-group clearfix">
+                                                    <label class="col-sm-2 control-label">其它信息</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea class="form-control content" id="content" name="content" placeholder="让送养人看到你的诚意..."></textarea>
+                                                    </div>
+                                                </div>
+                                            
+                                            
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                                            </button>
+                                            <button type="button"  onclick = "applyadopt()" class="btn btn-primary">
+                                                提交申请
+                                            </button><span id="tip"> </span>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal -->
+                            </div>
+                            </form>
 					</article>
 					<a href="" name="comment"></a>
 					<!-- 评论区 -->
@@ -334,20 +441,7 @@
 							</article>
 						</div>
 					   </div>
-					   <div class="sidebar-widget">
-						<h3 class="sidebar-title">类别栏目</h3>
-						<div class="widget-container">
-							<ul class="cate">
-								<li><a href="#">Fashion</a></li>
-								<li><a href="#">Art</a></li>
-								<li><a href="#">Design</a></li>
-								<li><a href="#">Featured</a></li>
-								<li><a href="#">Graphics</a></li>
-								<li><a href="#">Peoples</a></li>
-								<li><a href="#">Uncategorized</a></li>
-							</ul>
-						</div>
-					</div>
+	
 
 					</aside>
 
@@ -357,21 +451,7 @@
 			</div>
 		</div>
 		
-		<footer class="footer"> 
-
-			<div class="footer-bottom">
-				<h5>感谢使用Bedgasm Blog</h5>
-				<i class="fa fa-copyright"></i> Copyright 2018 Bedgasm Blog. All Rights Reserved.<br>
-				
-			</div>
-
-		</footer>
-
-
-		<button class="back-to-top" id="backtopbtn">
-			<p class="backtop">回到顶部</p>
-			<span class="glyphicon glyphicon-plane"></span>
-		</button>
+	
 
 
 
@@ -383,7 +463,10 @@
 		<script type="text/javascript" src="js/common.js"></script>
         <script type="text/javascript" src="js/adopt-detail.js"></script>
         <script type="text/javascript" src="js/prompt.js "></script>
-        
+        <script src="js/cityselect.js"></script>
+        <script type="text/javascript">
+            var test=new Vcity.CitySelector({input:'citySelect'});
+        </script>
         
 </body>
 </html>

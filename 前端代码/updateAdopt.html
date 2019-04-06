@@ -101,7 +101,7 @@
     <div class="container">
         <div class="row write-container">
             <div class="header clearfix">
-                        <h2 class="main-title">发布领养信息</h2>       
+                        <h2 class="main-title">修改领养信息</h2>       
              </div>   
             <div class="form-group clearfix">
                 <label class="col-md-2 control-label">宠物昵称:</label>
@@ -137,20 +137,9 @@
                 </div>
             </div>
             <div class="form-group clearfix">
-                <label class="col-md-2 control-label">宠物年龄：</label>
+                <label class="col-md-2 control-label">宠物年龄:</label>
                 <div class="col-md-9">
-                    <select class="form-control" id="age">
-                        <option>小于1岁</option>
-                        <option>1岁</option>
-                        <option>2岁</option>
-                        <option>3岁</option>
-                        <option>4岁</option>
-                        <option>5岁</option>
-                        <option>6岁</option>
-                        <option>7岁</option>
-                        <option>8岁</option>
-                        <option>大于8岁</option>
-                    </select>
+                    <input type="text" class="form-control" id="age" placeholder="请输入宠物年龄">
                 </div>
             </div>
             <div class="form-group clearfix">
@@ -225,7 +214,7 @@
             </div>
             <div class="form-group clearfix">
                 <div class="col-md-2">
-                    <input type="submit" class="saveinfo btn btn-primary" name="submit" value="发布领养" onclick="addAdoption()">
+                    <input type="submit" class="saveinfo btn btn-primary" name="submit" value="确认修改" onclick="modifyAdoption()">
                 </div>
             </div>
 
@@ -251,7 +240,8 @@
         var test=new Vcity.CitySelector({input:'citySelect'});
     </script>
 		<script type="text/javascript" src="js/prompt.js "></script>
-        <script type="text/javascript" src="js/writeAdopt.js"></script>
+        <script type="text/javascript" src="js/updateAdopt.js"></script>
+
 
 </body>
 

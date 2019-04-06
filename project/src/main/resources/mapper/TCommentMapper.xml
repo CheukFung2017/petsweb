@@ -96,11 +96,11 @@
   <select id="listComment" parameterType="Map" resultMap="BaseResultMap">
     select * from t_comment
     <where>
-      <if test="post_id!=null">
-        and post_id=#{postId}
+      <if test="postId != null">
+        and post_id = #{postId,jdbcType=INTEGER}
       </if>
-      <if test="user_id!=null">
-        and user_id=#{userId}
+      <if test="userId != null">
+        and user_id = #{userId,jdbcType=INTEGER}
       </if>
     </where>
     order by comment_date desc

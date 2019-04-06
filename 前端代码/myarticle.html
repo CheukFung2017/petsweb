@@ -77,7 +77,7 @@
                     <div id="prompt-box" onmouseover="showPromptBox()" onmouseout="closePromptBox()">
                   
                             <p>
-                                <a onclick="gohome()">我的发布</a>
+                                <a onclick="gohome()">我的帖子</a>
                             </p>
                             <p>
                                 <a onclick="gomanager()">我的评论</a>
@@ -100,11 +100,12 @@
                             <li><a href="personHome.html" class="myhead"><!-- <div class="myhead"></div> --></a></li>
                         </ul>
                         <ul class="nav nav-sidebar">
-                            <li><a href="personinfo.html"><span class="glyphicon glyphicon-home">&nbsp</span>我的资料</a></li>
-                            <li  class="active"><a href="myarticle.html"><span class="glyphicon glyphicon-pushpin">&nbsp</span>我的发布</a></li>
-                            <li><a href="mycomment.html"><span class="glyphicon glyphicon-comment">&nbsp</span>我的评论</a></li>
-                            <li><a href="mycollection.html"><span class="glyphicon glyphicon-star">&nbsp</span>我的收藏</a></li>
-                            <!-- <li><a href="#">栏目</a></li> -->
+                          <li><a href="personinfo.html"><span class="glyphicon glyphicon-home">&nbsp</span>我的资料</a></li>
+                          <li><a href="myarticle.html"><span class="glyphicon glyphicon-alarm">&nbsp</span>消息中心</a></li>
+                          <li class="active"><a href="myarticle.html"><span class="glyphicon glyphicon-pushpin">&nbsp</span>我的发布</a></li>
+                          <li><a href="mycomment.html"><span class="glyphicon glyphicon-comment">&nbsp</span>我的评论</a></li>
+                          <li><a href="mycollection.html"><span class="glyphicon glyphicon-star">&nbsp</span>我的收藏</a></li>
+                          <!-- <li><a href="#">栏目</a></li> -->
                         </ul>
                     
                         <ul class="nav nav-sidebar">		
@@ -120,10 +121,10 @@
 					            </form>
 			       			 </div> -->
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main">
-      <form action="/Article/checkAll" method="post" >
+      <form  method="post" >
         <!-- <h1 class="page-header">操作</h1> -->
         
-        <h1 class="page-header">我的发布 <span class="badge">7</span></h1>
+        <h1 class="page-header">我的发布 </h1>
         <div class="table-responsive">
           <table class="table table-striped table-hover">
             <thead>
@@ -136,63 +137,40 @@
                 <th><span class="glyphicon glyphicon-pencil"></span> <span class="visible-lg">操作</span></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="allarticle">
+              <!-- <tr>
                 <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title"><a href="#">这是测试的文章标题这是测试的文章标题这是测试的文章标题</a></td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
+                <td class="article-title"><a href="#">可爱小橘等你来领养</a></td>
+                <td>宠物领养</td>
+                <td class="hidden-sm">2</td>
+                <td>2019-03-24 10:21:30</td>
                 <td><a href="update-article.html">修改</a> <a rel="6">删除</a></td>
               </tr>
               <tr>
                 <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
                 <td class="article-title"><a href="#">这是测试的文章标题这是测试的文章标题这是测试的文章标题</a></td>
-                <td>这个是栏目</td>
+                <td>养宠心得</td>
                 <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
+                <td>2019-03-24 10:15:55</td>
                 <td><a href="">修改</a> <a rel="6">删除</a></td>
               </tr>
               <tr>
                 <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title"><a href="#">这是测试的文章标题这是测试的文章标题这是测试的文章标题</a></td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
+                <td class="article-title"><a href="#">1岁英短免费送</a></td>
+                <td>宠物领养</td>
+                <td class="hidden-sm">6</td>
+                <td>2019-03-22 15:44:12</td>
                 <td><a href="">修改</a> <a rel="6">删除</a></td>
               </tr>
               <tr>
                 <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title"><a href="#">这是测试的文章标题这是测试的文章标题这是测试的文章标题</a></td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
+                <td class="article-title"><a href="#">求大家帮我找找我家大金</a></td>
+                <td>宠物救助</td>
+                <td class="hidden-sm">3</td>
+                <td>2019-03-22 09:54:11</td>
                 <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title"><a href="#">这是测试的文章标题这是测试的文章标题这是测试的文章标题</a></td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title"><a href="#">这是测试的文章标题这是测试的文章标题这是测试的文章标题</a></td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
-              <tr>
-                <td><input type="checkbox" class="input-control" name="checkbox[]" value="" /></td>
-                <td class="article-title"><a href="#">这是测试的文章标题这是测试的文章标题这是测试的文章标题</a></td>
-                <td>这个是栏目</td>
-                <td class="hidden-sm">0</td>
-                <td>2015-12-03</td>
-                <td><a href="">修改</a> <a rel="6">删除</a></td>
-              </tr>
+              </tr> -->
+              
             </tbody>
           </table>
         </div>
@@ -204,15 +182,12 @@
                 <button type="submit" class="btn btn-default" data-toggle="tooltip" data-placement="bottom" title="删除全部选中" name="checkbox_delete">删除</button>
               </div>
             </div>
-            <ul class="pagination pagenav">
-              <li class="disabled"><a aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
-              <li class="active"><a href="#">1</a></li>
-              <li><a href="#">2</a></li>
-              <li><a href="#">3</a></li>
-              <li><a href="#">4</a></li>
-              <li><a href="#">5</a></li>
-              <li><a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
-            </ul>
+              <ul class="pagination pagenav" id="pagenav">
+                <!-- <li id="backpage"><a aria-label="Previous" onclick="backArticlePage()"> <span aria-hidden="true">&laquo;</span> </a></li>
+                <li id="nextpage"><a onclick="nextArticlePage()" aria-label="Next"><span aria-hidden="true">&raquo;</span> </a></li>
+                <li class="jumppage"><input type="button" onclick="jumpArticlePage()" value="跳到"><input type="text" class="pagearea" class="jumppage2">页</li>
+                <li><p id="totalpage"></p></li> -->
+              </ul>
           </nav>
         </footer>
       </form>
@@ -225,6 +200,9 @@
 <script src="js/bootstrap.min.js"></script> 
 <script src="js/admin-scripts.js"></script> 
 <script type="text/javascript" src="js/prompt.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+
+<script type="text/javascript" src="js/articleManager.js"></script>
 <script>
 //是否确认删除
 $(function(){   

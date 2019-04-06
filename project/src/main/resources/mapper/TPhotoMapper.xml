@@ -19,6 +19,10 @@
     delete from t_photo
     where id = #{id,jdbcType=INTEGER}
   </delete>
+  <delete id="deleteByPostId" parameterType="java.lang.Integer" >
+    delete from t_photo
+    where post_id = #{postId,jdbcType=INTEGER}
+  </delete>
   <insert id="insert" parameterType="com.zhuofeng.petsweb.entity.TPhoto" >
     insert into t_photo (id, photo_address, post_id
       )

@@ -137,20 +137,9 @@
                 </div>
             </div>
             <div class="form-group clearfix">
-                <label class="col-md-2 control-label">宠物年龄：</label>
+                <label class="col-md-2 control-label">宠物年龄:</label>
                 <div class="col-md-9">
-                    <select class="form-control" id="age">
-                        <option>小于1岁</option>
-                        <option>1岁</option>
-                        <option>2岁</option>
-                        <option>3岁</option>
-                        <option>4岁</option>
-                        <option>5岁</option>
-                        <option>6岁</option>
-                        <option>7岁</option>
-                        <option>8岁</option>
-                        <option>大于8岁</option>
-                    </select>
+                    <input type="text" class="form-control" id="age" placeholder="请输入宠物年龄">
                 </div>
             </div>
             <div class="form-group clearfix">
@@ -253,60 +242,7 @@
 		<script type="text/javascript" src="js/prompt.js "></script>
         <script type="text/javascript" src="js/writeAdopt.js"></script>
     <script>
-        // var $addPicturehide = $('#addpicturehide')
-        // var $addPicture = $('#addpicture')
-        // $addPicture.on('click', function () {
-        //     $addPicturehide.click()
-        // })
-        // $addPicturehide.on('change', function (e) {
-        //     var reader = new FileReader();
-        //     var file = this.files[0]
-        //     if (!/image\/\w+/.test(file.type)) {
-        //         alert("请确保文件为图像类型！");
-        //         return false;
-        //     }
-        //      var formData=new FormData();
-        //             formData.append('smfile',file);
-        //             
-        //             $.ajax({
-        //                 url: 'https://sm.ms/api/upload',
-        //                 type: 'POST',
-        //                 success: function(data){
-        //                     console.log(data);
-        //         //             $('#res').html(JSON.stringify(data.data.url));
-        //                 },
-        //                 error: function(data){
-        //                     console.log(data);
-        //                 },
-        //                 
-        //                 data:formData,
-        //                 cache: false,
-        //                 contentType: false,
-        //                 processData: false
-        //                 
-        //             });
-        //     reader.readAsDataURL(file);
-        //     reader.onload = function (e) {
-        //         var $img = $(document.createElement('img'))
-        //         $img.attr('src', this.result)
-        //         $img.attr('class', 'pet-picture')
-        //         var $hover = $(document.createElement('div'))
-        //         $hover.attr('class', 'pet-picture-hover')
-                
-        //         var $holder = $(document.createElement('div'))
-        //         $holder.attr('class', 'pet-picture-holder')
-        //         $holder.append($img)
-        //         $holder.append($hover)
-
-        //         $hover.on('click', function () { 
-        //             $(this).parent().remove()
-        //         })
-
-        //         $addPicturehide.before($holder)
-
-        //     }
-
-        // })
+     
     </script>
 
 </body>

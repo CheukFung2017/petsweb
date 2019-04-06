@@ -2,10 +2,7 @@ package com.zhuofeng.petsweb.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zhuofeng.petsweb.entity.TAdoption;
-import com.zhuofeng.petsweb.entity.TPhoto;
-import com.zhuofeng.petsweb.entity.TPost;
-import com.zhuofeng.petsweb.entity.TUser;
+import com.zhuofeng.petsweb.entity.*;
 import com.zhuofeng.petsweb.service.AdoptService;
 import com.zhuofeng.petsweb.service.PostService;
 import com.zhuofeng.petsweb.util.result.Result;
@@ -39,7 +36,7 @@ public class AdoptController {
     public Result<Object> toList(@RequestParam int pageNum, @RequestParam int pageSize){
 //        String orderby = "t_post.post_id desc";
 //        String orderby="t_post.phone";
-        String orderby = "t_adoption.adopt_id desc";
+        String orderby = "t_post.updated desc";
 
 
 
@@ -68,6 +65,20 @@ public class AdoptController {
         return Result.success(tAdoption);
     }
 
+    //更新领养文章
 
+    @RequestMapping(value = "/modify",consumes = "application/json; charset=utf-8")
+    public Result<TAdoption> modifyAdopt(@RequestBody TAdoption tAdoption){
+        adoptService.modifyAdopt(tAdoption);
+        return Result.success(tAdoption);
+    }
+
+
+    //申请领养
+    @RequestMapping("/apply")
+    public Result<TApply> applyAdopt(TApply tApply){
+        adoptService.insertApply(tApply);
+        return Result.success(tApply);
+    }
 
 }

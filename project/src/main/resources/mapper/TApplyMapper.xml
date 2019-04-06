@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhuofeng.petsweb.dao.TApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.zhuofeng.petsweb.entity.TApply" >
+    <id column="apply_id" property="applyId" jdbcType="INTEGER" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="age" property="age" jdbcType="VARCHAR" />
+    <result column="experience" property="experience" jdbcType="INTEGER" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="post_id" property="postId" jdbcType="INTEGER" />
+    <result column="applyname" property="applyname" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    apply_id, sex, age, experience, job, city, phone, content, post_id, applyname, user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_apply
+    where apply_id = #{applyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_apply
+    where apply_id = #{applyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zhuofeng.petsweb.entity.TApply" >
+    insert into t_apply (apply_id, sex, age, 
+      experience, job, city, 
+      phone, content, post_id, 
+      applyname, user_id)
+    values (#{applyId,jdbcType=INTEGER}, #{sex,jdbcType=INTEGER}, #{age,jdbcType=VARCHAR}, 
+      #{experience,jdbcType=INTEGER}, #{job,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{postId,jdbcType=INTEGER}, 
+      #{applyname,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zhuofeng.petsweb.entity.TApply" >
+    insert into t_apply
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        apply_id,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="age != null" >
+        age,
+      </if>
+      <if test="experience != null" >
+        experience,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="postId != null" >
+        post_id,
+      </if>
+      <if test="applyname != null" >
+        applyname,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="applyId != null" >
+        #{applyId,jdbcType=INTEGER},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="applyname != null" >
+        #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhuofeng.petsweb.entity.TApply" >
+    update t_apply
+    <set >
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="age != null" >
+        age = #{age,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        experience = #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="postId != null" >
+        post_id = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="applyname != null" >
+        applyname = #{applyname,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where apply_id = #{applyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zhuofeng.petsweb.entity.TApply" >
+    update t_apply
+    set sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=INTEGER},
+      job = #{job,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
+      post_id = #{postId,jdbcType=INTEGER},
+      applyname = #{applyname,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
+    where apply_id = #{applyId,jdbcType=INTEGER}
+  </update>
+</mapper>

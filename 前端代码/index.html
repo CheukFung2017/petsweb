@@ -14,7 +14,7 @@
         <link rel="stylesheet" href="css/home.css"> 
         <link rel="stylesheet" href="css/prompt-box.css"> 
         <script src="js/jquery.min.js"></script>
-        <script src="js/sweetalert2.all.min.js"></script>
+        <!-- <script src="js/sweetalert2.all.min.js"></script> -->
 
     </head>
     <body>
@@ -31,7 +31,7 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a id="navlogo" href="index.html"></a></li>
+                    <!-- <li><a id="navlogo" href="index.html"></a></li> -->
                     <li class="active">
                         <a href="index.html">首页</a>
                     </li>
@@ -142,9 +142,9 @@
                                 <span>还没账号?
                                     <a href="javascript: showRegisterForm();">去注册&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                                 </span>
-                                <span>
+                                <!-- <span>
                                     <a href="forgetpassword.html">(忘记密码?)</a>
-                                </span>
+                                </span> -->
                             </div>
                             <div class="forgot register-footer" style="display:none">
                                 <span>已有账号?</span>
@@ -155,52 +155,53 @@
                 </div>
         </div>
         
-        <!-- 轮播图 -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000">
-                    <!-- 轮播（Carousel）指标 -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                        <li data-target="#myCarousel" data-slide-to="1"></li>
-                        <li data-target="#myCarousel" data-slide-to="2"></li>
-                        <li data-target="#myCarousel" data-slide-to="3"></li>
-                        <li data-target="#myCarousel" data-slide-to="4"></li>
-                    </ol>
-                    <!-- 轮播（Carousel）项目 -->
-                    <div class="carousel-inner">
-            
-                        <div class="item active">
-                            <a href="#"><img src="images/1.jpg" alt="First slide" style="width: 100%;height: 100%;"></a>
-                            <div class="carousel-caption">英国旅游 地地道道的英伦味</div>
-                        </div>
-                        <div class="item">
-                            <a href="#"><img src="images/2.jpg" alt="Second slide" style="width: 100%;height: 100%;"></a>
-                            <div class="carousel-caption">北英格兰时光之旅 遇见最迷人的英伦范儿</div>
-                        </div>
-                        <div class="item">
-                            <a href="#"><img src="images/3.jpg" alt="Third slide" style="width: 100%;height: 100%;"></a>
-                            <div class="carousel-caption">好用的 Chrome 扩展，我们又为你找到了这 10 款</div>
-                        </div>
-                        <div class="item">
-                            <a href="#"><img src="images/4.jpg" alt="Fourth slide" style="width: 100%;height: 100%;"></a>
-                            <div class="carousel-caption">没想到柏林十大必去的景 竟是一场时尚歌舞秀</div>
-                        </div>
-                        <div class="item">
-                            <a href="#"><img src="images/9.jpg" alt="Fifth slide" style="width: 100%;height: 100%;"></a>
-                            <div class="carousel-caption">旅行灵感开始的地方</div>
-                        </div>
-                    </div>
-                    <!-- 轮播（Carousel）导航 -->
-                    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-        </div>
+        
 
         <div class="container">
+            <!-- 轮播图 -->
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="4000" style="margin-right:-15px;margin-left:-15px;">
+                <!-- 轮播（Carousel）指标 -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                    <li data-target="#myCarousel" data-slide-to="3"></li>
+                    <li data-target="#myCarousel" data-slide-to="4"></li>
+                </ol>
+                <!-- 轮播（Carousel）项目 -->
+                <div class="carousel-inner">
+        
+                    <!-- <div class="item active">
+                        <a href="#"><img src="images/banner1.jpeg" alt="First slide" style="width: 100%;height: auto;"></a>
+                        <div class="carousel-caption">可爱的小贵宾，你心动了吗</div>
+                    </div> -->
+                    <div class="item active">
+                        <a href="#"><img src="images/banner2.jpeg" alt="Second slide" style="width: 100%;height: auto;"></a>
+                        <div class="carousel-caption">如何有效避免狗狗惹上疾病</div>
+                    </div>
+                    <div class="item">
+                        <a href="#"><img src="images/banner2.jpeg" alt="Third slide" style="width: 100%;height: 100%;"></a>
+                        <div class="carousel-caption">好心人帮帮忙吧</div>
+                    </div>
+                    <!-- <div class="item">
+                        <a href="#"><img src="images/4.jpg" alt="Fourth slide" style="width: 100%;height: 100%;"></a>
+                        <div class="carousel-caption">没想到柏林十大必去的景 竟是一场时尚歌舞秀</div>
+                    </div>
+                    <div class="item">
+                        <a href="#"><img src="images/9.jpg" alt="Fifth slide" style="width: 100%;height: 100%;"></a>
+                        <div class="carousel-caption">旅行灵感开始的地方</div>
+                    </div> -->
+                </div>
+                <!-- 轮播（Carousel）导航 -->
+                <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+    </div>
             <div class="row">
                 <div class="col-md-7 sidebar-gutter">
                    <div class="sidebar-widget">
@@ -325,25 +326,39 @@
                                     <div class="widget-container" id="hotarticle">
                                             <article class="widget-post">
                                                     <div class="post-image">
-                                                        <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                                        <a href="post.html"><img src="images/courtship1.jpg" alt=""></a>
                                                     </div>
                                                     <div class="post-body">
-                                                        <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
-                                                        <div class="post-meta">
-                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                            <h2><a href="post.html">超帅金毛找女友啦</a></h2>
+                                                            <div class="pet_info row">
+                                                                <span class="pet_msg col-md-6">宠物类型：狗狗</span><span class="pet_msg col-md-6">宠物品种：金毛</span> 
+                                                            </div>
+                                                            <div class="pet_info row">
+                                                                 <span class="pet_msg col-md-6">宠物性别:公</span><span class="pet_msg col-md-6">所在地区：广州</span>
+                                                            </div>
+
+                                                            <div class="post-meta">
+                                                                <span><i class="fa fa-clock-o"></i>2019-03-24 10:21:30</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 8</a></span>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                             </article>
                                             <article class="widget-post">
                                                     <div class="post-image">
-                                                        <a href="post.html"><img src="images/90x60-1.jpg" alt=""></a>
+                                                        <a href="post.html"><img src="images/courtship2.jpeg" alt=""></a>
                                                     </div>
                                                     <div class="post-body">
-                                                        <h2><a href="post.html">The State of the Word 2014 State . Lorem ipsum dolor sit amet consectetur adipisicing elitid exercitationem? </a></h2>
-                                                        <div class="post-meta">
-                                                            <span><i class="fa fa-clock-o"></i> 2. august 2015</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 23</a></span>
+                                                            <h2><a href="post.html">英短美眉找对象啦</a></h2>
+                                                            <div class="pet_info row">
+                                                                <span class="pet_msg col-md-6">宠物类型：猫猫</span><span class="pet_msg col-md-6">宠物品种：英国短毛猫</span> 
+                                                            </div>
+                                                            <div class="pet_info row">
+                                                                 <span class="pet_msg col-md-6">宠物性别:母4</span><span class="pet_msg col-md-6">所在地区：浙江</span>
+                                                            </div>
+
+                                                            <div class="post-meta">
+                                                                <span><i class="fa fa-clock-o"></i>2019-03-24 10:21:30</span> <span><a href="post.html"><i class="fa fa-comment-o"></i> 8</a></span>
+                                                            </div>
                                                         </div>
-                                                    </div>
                                             </article>
                                             <article class="widget-post">
                                                     <div class="post-image">

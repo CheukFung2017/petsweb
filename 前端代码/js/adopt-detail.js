@@ -1,3 +1,5 @@
+var id=sessionStorage.getItem("userId");
+// var username=sessionStorage.getItem("userName");
 window.onload = function(){
     loadAdoptDetail();
     testfunction();
@@ -81,6 +83,8 @@ function loadAdoptDetail(){
                 var post=data.post;
                 var petName = data.petName;
                 var petType = post.petType;
+                var title = post.title;
+                $(".title").text(title);
                 switch(petType){
                     case 1:
                         $(".pet_type").text("狗狗");
@@ -131,10 +135,24 @@ function loadAdoptDetail(){
                 var contactname = post.contactname;
                 $(".contact_name").text(contactname);
                 var phone = post.phone;
-                $(".phone").text(phone);
+                // $(".phone").text(phone);
                 var city = post.city;
                 $(".city").text(city);
-                var description = post.description;
+                var isAdopted = data.isAdopted;
+                switch(isAdopted){
+                    case 1:
+                     $(".adoptstate").text("等待领养");
+                     break;
+                    case 0:
+                    $(".adoptstate").text("已被领养");
+                    break;
+                    default:
+                    $(".adoptstate").text("等待领养");
+                    break;
+
+                }
+
+                var description = post.description; 
                 $(".adopt_description").text(description);
                 var author = post.author;
                 $(".author").text("by "+author);
@@ -277,4 +295,60 @@ function addComment() {
         // confirm("登录之后才能评论喔");
     }
 
+}
+
+
+function applyadopt(){
+    var applyname = $("#applyname").val();
+    var applysex = $("input[name='applysex']:checked").val();
+    var applyage = $("applyage").val();
+    var experience = $("input[name='experience']:checked").val();
+    var job = $("#job").val();
+    var applycity = $("#citySelect").val();
+    var applyphone = $("#applyphone").val();
+    var content = $("#content").val();
+
+    if(isLogin){
+        var settings = {
+            url: "http://localhost:8080/Adopt/apply",
+            crossDomain: "true",
+            xhrFields: {
+                withCredentials: "true"
+            },
+            type: "POST",
+            data: {
+                'sex':applysex,
+                'age':applyage,
+                'experience':experience,
+                'job':job,
+                'city':applycity,
+                'phone':applyphone,
+                'content': content,
+                'userId': id,
+                'postId': postId,
+                'applyname':applyname
+            },
+            dataType: "json",
+            success: function(res) {
+                console.log("apply success");
+                console.log("userId: "+id);
+                console.log("postId: "+postId);
+                $("#applyModal").modal('hide');
+                // swal('评论成功！','','success');
+                // setTimeout('location.reload()',1000);
+            },
+    
+            error: function(res) {
+                console.log("add error");
+            }
+        };
+        $.ajax(settings);
+    }
+    else{
+        swal('登录之后才能评论喔~','','error');
+        
+        // confirm("登录之后才能评论喔");
+    }
+
+  
 }

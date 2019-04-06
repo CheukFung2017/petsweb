@@ -3,10 +3,11 @@ $(function () {
 	 $("#accountname").html(sessionStorage.getItem("userName"));    
      console.log("role"+sessionStorage.role);
     console.log("houtaiid"+sessionStorage.userId);
-    var myhead=sessionStorage.getItem("profile");
-    $("#headimage").css("background",`url(${myhead}) no-repeat`);
-    $("#headimage").css("background-position",`center center`);
-    $("#headimage").css("background-size",`100%`);
+    var profile=sessionStorage.getItem("profile");
+    console.log("profile"+ profile);
+    $(".myhead").css("background",`url(${profile}) no-repeat`);
+		    $(".myhead").css("background-position",`center center`);
+		    $(".myhead").css("background-size",`100%`);
     if(sessionStorage.role==1){
         console.log(sessionStorage.role);
         $("#myarticle").css("display","block");

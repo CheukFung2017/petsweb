@@ -1,11 +1,10 @@
 package com.zhuofeng.petsweb.service.impl;
 
 import com.zhuofeng.petsweb.dao.TAdoptionMapper;
+import com.zhuofeng.petsweb.dao.TApplyMapper;
+import com.zhuofeng.petsweb.dao.TPhotoMapper;
 import com.zhuofeng.petsweb.dao.TPostMapper;
-import com.zhuofeng.petsweb.entity.TAdoption;
-import com.zhuofeng.petsweb.entity.TPhoto;
-import com.zhuofeng.petsweb.entity.TPost;
-import com.zhuofeng.petsweb.entity.TUser;
+import com.zhuofeng.petsweb.entity.*;
 import com.zhuofeng.petsweb.service.AdoptService;
 import com.zhuofeng.petsweb.service.PhotoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,11 @@ public class AdoptServiceimpl implements AdoptService {
     private PhotoService photoService;
     @Autowired
     private AdoptService adoptService;
+    @Autowired
+    private TPhotoMapper photoMapper;
+    @Autowired
+    private TApplyMapper applyMapper;
+
 
     @Override
     public List<TAdoption> listAdoption(){
@@ -43,6 +47,10 @@ public class AdoptServiceimpl implements AdoptService {
     public Integer insertAdoption(TAdoption tAdoption){
         return tAdoptionMapper.insertSelective(tAdoption);
     }
+
+    @Override
+    @Transactional
+    public Integer updateAdoption(TAdoption tAdoption){ return tAdoptionMapper.updateByPrimaryKeySelective(tAdoption);}
 
     @Override
     @Transactional
@@ -73,8 +81,30 @@ public class AdoptServiceimpl implements AdoptService {
     }
 
     @Override
+    public int modifyAdopt(TAdoption tAdoption){
+        TPost post = tAdoption.getPost();
+        int postId = post.getPostId();
+        photoMapper.deleteByPostId(postId);
+        tPostMapper.updateByPrimaryKeySelective(post);
+        if(post.getPhotos()!=null){
+            List<TPhoto> tPhotos = post.getPhotos();
+            for (TPhoto tPhoto : tPhotos) {
+                tPhoto.setPostId(postId);
+            }
+            photoService.insertPhoto(tPhotos);
+        }
+        adoptService.updateAdoption(tAdoption);
+        return 1;
+    }
+
+    @Override
     public  TAdoption fingByPostId(Integer postId){
         return tAdoptionMapper.selectByPostId(postId);
+    }
+
+    @Override
+    public int insertApply(TApply apply){
+        return applyMapper.insertSelective(apply);
     }
 
 }

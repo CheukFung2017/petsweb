@@ -64,7 +64,7 @@ function loadInfo(){
             email=res['user']['email'];	
             console.log("phone: "+phone);
             // $('#username').html(username);
-            $('#finalImg').attr('src',profile);
+            $('.finalImg').attr('src',profile);
            
             $('#realname').val(realname);
             $('#email').val(email);

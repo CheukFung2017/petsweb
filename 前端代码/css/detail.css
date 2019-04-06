@@ -144,3 +144,21 @@
     height:260px;
     vertical-align: middle;
 }
+
+.demo{
+    margin:0 0;
+}
+.selectcity{
+    margin:0 0;
+}
+.citychoose{
+    margin-top: -3px;
+}
+
+#myModalLabel{
+    text-align: center;
+}
+
+#content{
+    height: 130px;
+}

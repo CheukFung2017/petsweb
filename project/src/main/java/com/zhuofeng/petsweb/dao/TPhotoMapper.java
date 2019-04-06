@@ -21,4 +21,6 @@ public interface TPhotoMapper {
     int updateByPrimaryKey(TPhoto record);
 
     int insertAllPhotos(@Param("t_photos") List<TPhoto> tPhotos);
+
+    int deleteByPostId(Integer postId);
 }

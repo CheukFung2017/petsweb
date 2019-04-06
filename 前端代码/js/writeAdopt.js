@@ -117,9 +117,8 @@ function addAdoption(){
     var petName = $('#pet_name').val();
     var petType = $("input[name='type']:checked").val();
     var sex = $('input:radio[name="sex"]:checked').val();
-    
-    var options=$("#age option:selected");
-    var age = options.text();
+ 
+    var age = $("#age").val();
     var immune = $("input[name='whetherimmune']:checked").val();
     var sterilized = $("input[name='whethersterilized']:checked").val();
     var contactname = $('#contact_name').val();
@@ -169,7 +168,7 @@ function addAdoption(){
             'sex':sex,
             'sterilized':sterilized,
             'immune':immune,
-            'isAdopt':"0",
+            'isAdopt':0,
         	'post':{
                 'title':title,
                 'summary':summary,

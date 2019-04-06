@@ -62,7 +62,11 @@ function loadAdopt(){
                     if(photos!=null)
                     {
                         photoAddress=photos[0].photo_address;
-                        console.log(photoAddress);
+                        // console.log("address: "+photos[0].photo_address);
+                        console.log(photos);
+                    }
+                    else{
+                        photoAddress="https://i.loli.net/2019/03/25/5c9893c3d7bf5.jpeg";
                     }
                     content +=
                         ` <article class="widget-post">
